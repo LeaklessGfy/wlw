@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { getMode } from "mock/modes";
+import { getWrestlers } from "mock/wrestlers";
 import WrestlerStatVue from "../components/Wrestler/WrestlerStat.vue";
 
 export default {
@@ -59,9 +61,11 @@ export default {
     turn: 0
   }),
   computed: {
+    mode() {
+      return getMode(this.$route.params.mode);
+    },
     wrestlers() {
-      //this.$route.params
-      return [{ name: "Triple H" }, {}];
+      return getWrestlers(this.$route.params.w);
     }
   },
   components: {

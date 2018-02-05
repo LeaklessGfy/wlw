@@ -1,11 +1,13 @@
 <template>
-  <b-card :title="mode.title"
-          :img-src="mode.img"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem;"
-          class="mb-2">
+  <b-card
+    :img-src="mode.img"
+    img-top
+    img-alt="Mode image"
+    tag="mode"
+    style="max-width: 20rem;"
+    class="mb-2"
+  >
+    <h4 slot="header">{{mode.name}} <b-badge>{{mode.numbers}}</b-badge></h4>
     <p class="card-text">
       {{ mode.description }}
     </p>
@@ -21,7 +23,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-</style>

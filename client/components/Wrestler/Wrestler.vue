@@ -3,8 +3,6 @@
     :title="wrestler.name ? wrestler.name : 'Select'"
     :img-src="wrestler.img ? wrestler.img : 'https://www.shareicon.net/data/512x512/2015/10/26/662430_man_512x512.png'"
     v-on:click="onClick(id)"
-    bg-variant="dark"
-    text-variant="white"
     img-alt="Image"
     img-top
     tag="article"
@@ -27,6 +25,9 @@ export default {
 </script>
 
 <style>
+.wrestler img {
+  max-height: 216px;
+}
 .wrestler.active {
   border: 2px solid goldenrod;
 }

@@ -1,4 +1,4 @@
-export default [
+const wrestlers = [
   {
     name: "Triple H",
     img: "https://www.therichest.com/wp-content/uploads/Triple-H-.jpg"
@@ -14,3 +14,10 @@ export default [
       "https://orig00.deviantart.net/03ce/f/2015/333/f/7/batista_render_5_by_wwepnguploader-d9if7j7.png"
   }
 ];
+
+export const getWrestlers = array => {
+  const [first, second] = wrestlers;
+  return [first, second];
+};
+
+export default wrestlers;
