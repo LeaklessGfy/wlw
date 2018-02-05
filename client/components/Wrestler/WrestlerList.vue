@@ -11,7 +11,6 @@
           class="wrestler-item"
           rounded="circle"
           width="75"
-          height="75"
           alt="Wrestler image"
         />
       </b-col>
@@ -39,6 +38,8 @@ export default {
 }
 .wrestler-item {
   opacity: 0.7;
+  max-width: 75px;
+  max-height: 75px;
 }
 .wrestler-item:hover {
   cursor: pointer;

@@ -80,9 +80,3 @@ export default {
   }
 };
 </script>
-
-<style>
-body {
-  background-color: black !important;
-}
-</style>
