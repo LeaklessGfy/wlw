@@ -9,8 +9,7 @@
     style="max-width: 20rem;"
     class="mb-2 text-center mx-auto wrestler"
     v-bind:class="{'active': active}"
-  >
-  </b-card>
+  />
 </template>
 
 <script>

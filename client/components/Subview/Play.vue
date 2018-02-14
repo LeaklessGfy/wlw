@@ -44,7 +44,7 @@
 
         <!-- STATS -->
         <b-col cols="6">
-          <app-stat :wrestler="wrestlers[0]"></app-stat>
+          <app-stat :wrestler="wrestlers[0]" />
         </b-col>
       </b-row>
     </div>
@@ -52,25 +52,10 @@
 </template>
 
 <script>
-import { getMode } from "mock/modes";
-import { getWrestlers } from "mock/wrestlers";
-import WrestlerStatVue from "../components/Wrestler/WrestlerStat.vue";
-
 export default {
-  data: () => ({
-    turn: 0
-  }),
-  computed: {
-    mode() {
-      return getMode(this.$route.params.mode);
-    },
-    wrestlers() {
-      return getWrestlers(this.$route.params.w);
-    }
-  },
-  components: {
-    "app-wrestler": null,
-    "app-stat": WrestlerStatVue
+  props: {
+    turn: { type: Number, required: true },
+    wrestlers: { type: Array, required: true }
   }
 };
 </script>
