@@ -1,7 +1,7 @@
 <template>
   <div class="wrestler-box">
     <b-row v-for="(row, i) in wrestlers" :key="i">
-      <b-col cols="2" v-for="wrestler in row" :key="wrestler.id">
+      <b-col cols="2" v-for="wrestler in row" :key="wrestler.uid">
         <b-img
           :src="wrestler.img"
           :title="wrestler.name"

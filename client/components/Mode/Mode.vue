@@ -4,7 +4,6 @@
     img-top
     bg-variant="dark"
     img-alt="Mode image"
-    tag="mode"
     style="max-width: 20rem;"
     class="mb-2 text-white mode"
     v-on:click="onClick(mode)"

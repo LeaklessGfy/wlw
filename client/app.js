@@ -25,6 +25,7 @@ Vue.component(
   "app-wrestler-stat",
   require("./components/Wrestler/WrestlerStat")
 );
+Vue.component("app-card", require("./components/Card/Card"));
 Vue.component("app-select-mode", require("./components/Subview/SelectMode"));
 Vue.component(
   "app-select-wrestler",

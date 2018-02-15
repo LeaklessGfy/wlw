@@ -1,5 +1,5 @@
 <template>
-  <b-container class="mt-2">
+  <b-container class="mt-3">
     <b-row v-for="(row, i) in modes" :key="i">
       <b-col v-for="mode in row" cols="4" :key="mode.id">
         <app-mode :mode="mode" :onClick="onMode" />

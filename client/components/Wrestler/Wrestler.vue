@@ -1,8 +1,8 @@
 <template>
   <b-card 
     :title="wrestler ? wrestler.name : 'Select'"
-    :img-src="wrestler ? wrestler.img : 'https://www.shareicon.net/data/512x512/2015/10/26/662430_man_512x512.png'"
-    v-on:click="onClick(id)"
+    :img-src="wrestler ? wrestler.img : 'https://lh3.googleusercontent.com/EnHBPZtxV0Gkj_bVGADHHgqnEXE2PXtKYF4Rclovs0SJjO8n6vm60Y6Qxc0G1DqBn4k=w300'"
+    v-on:click="onClick(index)"
     img-alt="Image"
     img-top
     bg-variant="dark"
@@ -11,7 +11,9 @@
     class="mb-2 text-center mx-auto wrestler text-white"
     v-bind:class="{'active': active}"
   >
-    <div v-if="wrestler">
+    <b-badge>{{ index }}</b-badge>
+
+    <div v-if="wrestler" class="mt-2">
       <b-progress
         :value="wrestler.health.val"
         :title="wrestler.health.val + '/' + wrestler.health.max"      
@@ -21,16 +23,16 @@
       <icon
         name="circle"
         class="mt-2"
-        style="color: orange;margin: 2px;"
+        style="color: orange;margin: 0px 2px;"
         v-for="s in wrestler.stamina.val"
-        :key="s"
+        :key="wrestler.uid + '_s_' + s"
       />
 
       <icon
         name="circle"
-        style="color: blue;margin: 2px;"
+        style="color: blue;margin: 0px 2px;"
         v-for="s in wrestler.stamina.val"
-        :key="s"
+        :key="wrestler.uid + '_i_' + s"
       />
     </div>
   </b-card>
@@ -39,7 +41,7 @@
 <script>
 export default {
   props: {
-    id: Number,
+    index: String,
     wrestler: Object,
     onClick: Function,
     active: Boolean

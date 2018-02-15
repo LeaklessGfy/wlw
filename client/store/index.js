@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 import Play from "./play";
 
 Vue.use(Vuex);
@@ -31,7 +32,8 @@ const store = new Vuex.Store({
   actions,
   modules: {
     play: Play
-  }
+  },
+  plugins: [createPersistedState()]
 });
 
 export default store;

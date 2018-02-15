@@ -1,7 +1,11 @@
 <template>
   <b-row>
     <b-col>
-      <app-wrestler :wrestler="wrestlers[0]" />        
+      <app-wrestler
+        :index="wrestlers[0].index"
+        :wrestler="wrestlers[0].wrestler"
+        :active="wrestlers[0].index === active"
+      />        
     </b-col>
 
     <b-col>
@@ -12,7 +16,11 @@
     </b-col>
 
     <b-col>
-      <app-wrestler :wrestler="wrestlers[1]" />
+      <app-wrestler
+        :index="wrestlers[1].index"
+        :wrestler="wrestlers[1].wrestler"
+        :active="wrestlers[1].index === active"
+      />
     </b-col>
   </b-row>
 </template>
@@ -20,7 +28,8 @@
 <script>
 export default {
   props: {
-    wrestlers: { type: Array, required: true }
+    wrestlers: { type: Array, required: true },
+    active: { type: String, required: true }
   }
 };
 </script>

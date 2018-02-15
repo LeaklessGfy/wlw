@@ -7,21 +7,24 @@
     />
     <app-select-wrestler
       v-else-if="!ready"
-      :active="ptr"
-      :selected="selected"
+      :active="active"
+      :players="players"
       :wrestlers="wrestlers"
-      :onActive="choosePtr"
+      :onActive="chooseActive"
       :onWrestler="chooseWrestler"
       :onPlay="play"
+      :onBack="back"
     />
     <app-play
       v-else
-      :turn="0"
+      :turn="turn"
+      :viewer="viewer"
       :active="active"
       :targets="targets"
       :players="players"
       :card="card"
       :mode="mode"
+      :onBack="back"
     />
   </div>
 </template>
@@ -32,48 +35,62 @@ import { getMode } from "mock/modes";
 
 export default {
   data: () => ({
-    ptr: 0,
-    ready: false,
-    selected: []
+    ready: false
   }),
   methods: {
     chooseMode: function(mode) {
-      this.$store.commit("play/SELECT_MODE", {
+      this.$store.commit("play/SET_MODE", {
         mode
       });
     },
-    choosePtr: function(ptr) {
-      this.ptr = ptr;
+    chooseActive: function(active) {
+      this.$store.commit("play/SET_ACTIVE", {
+        active
+      });
     },
     chooseWrestler: function(wrestler) {
-      const selected = this.selected;
-      selected[this.active] = wrestler;
-      this.selected = selected.slice();
+      this.$store.commit("play/SET_PLAYER", {
+        active: this.active,
+        wrestler
+      });
     },
     play: function() {
-      if (this.selected.length < 2) {
-        return;
-      }
-      this.$store.commit("play/ADD_PLAYER", {
-        P1: this.selected[0],
-        CPU: this.selected[1]
-      });
       this.ready = true;
+    },
+    back: function() {
+      this.$store.commit("play/RESET");
     }
   },
   computed: {
+    viewer() {
+      return this.$store.state.play.viewer;
+    },
+    turn() {
+      return this.$store.state.play.turn;
+    },
+    active() {
+      return this.$store.state.play.active;
+    },
+    targets() {
+      return this.$store.state.play.targets;
+    },
+    next() {
+      return this.$store.state.play.next;
+    },
+    players() {
+      return this.$store.state.play.players;
+    },
+    card() {
+      return this.$store.state.play.card;
+    },
+    mode() {
+      return this.$store.state.play.mode;
+    },
     modes() {
       return chunk(this.$store.state.play.modes, 4);
     },
     wrestlers() {
       return chunk(this.$store.state.play.wrestlers, 6);
-    },
-    active() {},
-    targets() {},
-    players() {},
-    card() {},
-    mode() {
-      return this.$store.state.play.mode;
     }
   }
 };
