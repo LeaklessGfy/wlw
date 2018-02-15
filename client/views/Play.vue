@@ -6,7 +6,7 @@
       :onMode="chooseMode"
     />
     <app-select-wrestler
-      v-else-if="selected.length < 2"
+      v-else-if="!ready"
       :active="active"
       :selected="selected"
       :wrestlers="wrestlers"
@@ -17,6 +17,7 @@
     <app-play
       v-else
       :turn="0"
+      :mode="mode"
       :wrestlers="selected"
     />
   </div>
@@ -28,7 +29,8 @@ import { getMode } from "mock/modes";
 
 export default {
   data: () => ({
-    active: 0
+    active: 0,
+    ready: false
   }),
   methods: {
     chooseMode: function(mode) {
@@ -45,7 +47,12 @@ export default {
         wrestler
       });
     },
-    play: function() {}
+    play: function() {
+      if (this.selected.length < 2) {
+        return;
+      }
+      this.ready = true;
+    }
   },
   computed: {
     modes() {
@@ -63,3 +70,14 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  background: #222222 !important;
+}
+.ui {
+  height: 130px;
+  border-top: 2px solid #292b2c;
+  background: #000;
+}
+</style>

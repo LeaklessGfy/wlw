@@ -1,17 +1,37 @@
 const wrestlers = [
   {
     name: "Triple H",
-    img: "https://www.therichest.com/wp-content/uploads/Triple-H-.jpg"
+    img: "https://www.therichest.com/wp-content/uploads/Triple-H-.jpg",
+    health: {
+      val: 100,
+      max: 100
+    },
+    stamina: {
+      val: 10
+    }
   },
   {
     name: "John Cena",
-    img:
-      "https://img00.deviantart.net/2726/i/2017/141/7/0/john_cena_png_2017_by_ambriegnsasylum16-db9z2ji.png"
+    img: "https://www.wowkeren.com/images/photo/john_cena.jpg",
+    health: {
+      val: 100,
+      max: 100
+    },
+    stamina: {
+      val: 10
+    }
   },
   {
-    name: "Batista",
+    name: "Randy Orton",
     img:
-      "https://orig00.deviantart.net/03ce/f/2015/333/f/7/batista_render_5_by_wwepnguploader-d9if7j7.png"
+      "http://www.borntoworkout.com/wp-content/uploads/2016/02/Randy-Orton-Body-300x300.jpg",
+    health: {
+      val: 100,
+      max: 100
+    },
+    stamina: {
+      val: 10
+    }
   }
 ];
 

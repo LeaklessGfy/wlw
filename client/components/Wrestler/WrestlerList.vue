@@ -8,7 +8,7 @@
           v-on:click="onClick(wrestler)"
           thumbnail
           fluid
-          class="wrestler-item"
+          class="wrestler-item bg-dark"
           rounded="circle"
           width="75"
           alt="Wrestler image"
@@ -29,17 +29,15 @@ export default {
 
 <style scoped>
 .wrestler-box {
-  margin-top: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-top: 20px;
+  border: 1px solid #fff;
   height: 400px;
-  padding: 5px;
+  padding: 5px 15px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 .wrestler-item {
   opacity: 0.7;
-  max-width: 75px;
-  max-height: 75px;
 }
 .wrestler-item:hover {
   cursor: pointer;
