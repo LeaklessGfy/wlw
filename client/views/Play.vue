@@ -7,18 +7,21 @@
     />
     <app-select-wrestler
       v-else-if="!ready"
-      :active="active"
+      :active="ptr"
       :selected="selected"
       :wrestlers="wrestlers"
-      :onActive="chooseActive"
+      :onActive="choosePtr"
       :onWrestler="chooseWrestler"
       :onPlay="play"
     />
     <app-play
       v-else
       :turn="0"
+      :active="active"
+      :targets="targets"
+      :players="players"
+      :card="card"
       :mode="mode"
-      :wrestlers="selected"
     />
   </div>
 </template>
@@ -29,8 +32,9 @@ import { getMode } from "mock/modes";
 
 export default {
   data: () => ({
-    active: 0,
-    ready: false
+    ptr: 0,
+    ready: false,
+    selected: []
   }),
   methods: {
     chooseMode: function(mode) {
@@ -38,19 +42,22 @@ export default {
         mode
       });
     },
-    chooseActive: function(active) {
-      this.active = active;
+    choosePtr: function(ptr) {
+      this.ptr = ptr;
     },
     chooseWrestler: function(wrestler) {
-      this.$store.commit("play/SELECT_WRESTLER", {
-        active: this.active,
-        wrestler
-      });
+      const selected = this.selected;
+      selected[this.active] = wrestler;
+      this.selected = selected.slice();
     },
     play: function() {
       if (this.selected.length < 2) {
         return;
       }
+      this.$store.commit("play/ADD_PLAYER", {
+        P1: this.selected[0],
+        CPU: this.selected[1]
+      });
       this.ready = true;
     }
   },
@@ -58,14 +65,15 @@ export default {
     modes() {
       return chunk(this.$store.state.play.modes, 4);
     },
-    mode() {
-      return this.$store.state.play.mode;
-    },
     wrestlers() {
       return chunk(this.$store.state.play.wrestlers, 6);
     },
-    selected() {
-      return this.$store.state.play.selected;
+    active() {},
+    targets() {},
+    players() {},
+    card() {},
+    mode() {
+      return this.$store.state.play.mode;
     }
   }
 };

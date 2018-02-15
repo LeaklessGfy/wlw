@@ -4,19 +4,25 @@ import wrestlers from "mock/wrestlers";
 export default {
   namespaced: true,
   state: {
-    modes: modes,
+    turn: 0,
+    viewer: "P1",
+    active: "",
+    targets: [],
+    next: [],
+    players: {},
+    card: null,
     mode: null,
-    wrestlers: wrestlers,
-    selected: []
+    modes: modes,
+    wrestlers: wrestlers
   },
   mutations: {
     SELECT_MODE(state, payload) {
       state.mode = payload.mode;
     },
-    SELECT_WRESTLER(state, payload) {
-      const arr = state.selected;
-      arr[payload.active] = payload.wrestler;
-      state.selected = arr.slice();
+    ADD_PLAYER(state, payload) {
+      const players = Object.assign({}, state.players, {
+        [payload.key]: payload.wrestler
+      });
     }
   },
   action: {}

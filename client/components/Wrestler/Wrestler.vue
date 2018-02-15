@@ -11,7 +11,7 @@
     class="mb-2 text-center mx-auto wrestler text-white"
     v-bind:class="{'active': active}"
   >
-    <div v-if="wrestler !== null">
+    <div v-if="wrestler">
       <b-progress
         :value="wrestler.health.val"
         :title="wrestler.health.val + '/' + wrestler.health.max"      
