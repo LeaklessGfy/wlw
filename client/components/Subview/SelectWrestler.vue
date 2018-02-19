@@ -12,7 +12,7 @@
       <b-col>
         <app-wrestler
           :index="key1"
-          :wrestler="players[key1]"
+          :wrestler="players[key1] ? players[key1] : null"
           :onClick="onActive"
           :active="active === key1 ? true : false"
         />
@@ -20,7 +20,7 @@
       <b-col>
         <app-wrestler
           :index="key2"
-          :wrestler="players[key2]"
+          :wrestler="players[key2] ? players[key2] : null"
           :onClick="onActive"
           :active="active === key2 ? true : false"
         />

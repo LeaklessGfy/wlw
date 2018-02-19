@@ -1,3 +1,5 @@
+import { DDT } from "./cards";
+
 const wrestlers = [
   {
     uid: "h",
@@ -12,10 +14,10 @@ const wrestlers = [
       max: 10
     },
     intensity: {
-      val: 0,
+      val: 5,
       max: 10
     },
-    hand: [{ uid: "E" }]
+    hand: [DDT]
   },
   {
     uid: "cena",
@@ -33,7 +35,7 @@ const wrestlers = [
       val: 0,
       max: 10
     },
-    hand: [{ uid: "E" }]
+    hand: [DDT]
   },
   {
     uid: "orton",
@@ -52,7 +54,7 @@ const wrestlers = [
       val: 0,
       max: 10
     },
-    hand: [{ uid: "E" }]
+    hand: [DDT]
   }
 ];
 

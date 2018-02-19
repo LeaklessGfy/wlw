@@ -29,6 +29,17 @@ export default {
         [payload.active]: payload.wrestler
       });
     },
+    SET_CARD(state, payload) {
+      state.card = payload.card;
+    },
+    SET_TARGETS(state, payload) {
+      state.targets = payload.targets;
+    },
+    ADD_TARGET(state, payload) {
+      const targets = state.targets;
+      targets.push(payload.target);
+      state.targets = targets.slice();
+    },
     RESET(state, payload) {
       Object.assign(state, INITIAL);
     }

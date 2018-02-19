@@ -59,6 +59,7 @@ export default {
     },
     back: function() {
       this.$store.commit("play/RESET");
+      this.ready = false;
     }
   },
   computed: {
@@ -101,7 +102,7 @@ body {
   background: #222222 !important;
 }
 .ui {
-  height: 130px;
+  height: 140px;
   border-top: 2px solid #292b2c;
   background: #000;
 }
