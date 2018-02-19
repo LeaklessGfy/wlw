@@ -1,9 +1,14 @@
 <template>
   <b-container fluid class="mt-3">
     <!-- HEADER -->
-    <b-row>
+    <b-row class="mb-2">
       <b-col>
         <b-button v-on:click="onBack">Back</b-button>
+      </b-col>
+      <b-col class="text-center">
+        <em>Turn n: {{turn}}</em>
+      </b-col>
+      <b-col>
       </b-col>
     </b-row>
 

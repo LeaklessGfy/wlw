@@ -5,7 +5,8 @@
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item href="#/play">Play</b-nav-item>
-        <b-nav-item href="#" disabled>Disabled</b-nav-item>
+        <b-nav-item href="#/multi" disabled>Multiplayer</b-nav-item>
+        <b-nav-item href="#/about">About</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

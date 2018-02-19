@@ -30,7 +30,7 @@
     <!-- PLAY -->
     <b-row class="mt-2">
       <b-col class="text-center">
-        <b-button :disabled="false" variant="success" v-on:click="onPlay()">Play</b-button>
+        <b-button :disabled="disabledPlay()" variant="success" v-on:click="onPlay()">Play</b-button>
       </b-col>
     </b-row>
 
@@ -54,7 +54,15 @@ export default {
     key1: "P1",
     key2: "CPU1",
     keys: ["P1", "P2", "CPU1", "CPU2"]
-  })
+  }),
+  methods: {
+    disabledPlay() {
+      if (!this.players[this.key1] || !this.players[this.key2]) {
+        return true;
+      }
+      return false;
+    }
+  }
 };
 </script>
 
