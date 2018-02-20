@@ -52,6 +52,9 @@ export default {
     key2: "CPU1",
     keys: ["P1", "P2", "CPU1", "CPU2"]
   }),
+  mounted: function() {
+    this.$store.dispatch("play/fetchWrestlers");
+  },
   methods: {
     onActive: function(active) {
       this.$store.commit("play/SET_ACTIVE", {

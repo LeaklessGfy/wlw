@@ -12,6 +12,9 @@
 import chunk from "lodash/chunk";
 
 export default {
+  mounted: function() {
+    this.$store.dispatch("play/fetchModes");
+  },
   methods: {
     onMode: function(mode) {
       this.$store.commit("play/SET_MODE", {

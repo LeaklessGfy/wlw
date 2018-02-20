@@ -47,8 +47,18 @@ export default {
       state.wrestlers = payload.wrestlers;
     }
   },
-  action: {
-    fetchModes(state) {},
-    fetchWrestlers(state) {}
+  actions: {
+    fetchModes(ctx) {
+      const state = ctx.rootState.setting;
+      fetch(state.server + "/modes")
+        .then(r => r.json())
+        .then(modes => ctx.commit("SET_MODES", { modes }));
+    },
+    fetchWrestlers(ctx) {
+      const state = ctx.rootState.setting;
+      fetch(state.server + "/wrestlers")
+        .then(r => r.json())
+        .then(wrestlers => ctx.commit("SET_WRESTLERS", { wrestlers }));
+    }
   }
 };

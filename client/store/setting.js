@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: {
-    server: "http://localhost:4000"
+    server: "http://localhost:3000"
   },
   mutations: {
     SET_SERVER(state, payload) {
