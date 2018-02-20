@@ -54,13 +54,6 @@ import keys from "lodash/keys";
 
 export default {
   props: {
-    turn: { type: Number, required: true },
-    viewer: { type: String, required: true },
-    active: { type: String, required: true },
-    targets: { type: Array, required: true },
-    players: { type: Object, required: true },
-    card: Object,
-    mode: { type: Object, required: true },
     onBack: { type: Function, required: true }
   },
   methods: {
@@ -111,6 +104,30 @@ export default {
     }
   },
   computed: {
+    viewer() {
+      return this.$store.state.play.viewer;
+    },
+    turn() {
+      return this.$store.state.play.turn;
+    },
+    active() {
+      return this.$store.state.play.active;
+    },
+    players() {
+      return this.$store.state.play.players;
+    },
+    targets() {
+      return this.$store.state.play.targets;
+    },
+    next() {
+      return this.$store.state.play.next;
+    },
+    card() {
+      return this.$store.state.play.card;
+    },
+    mode() {
+      return this.$store.state.play.mode;
+    },
     child() {
       return require("../Mode/" + this.mode.uid);
     },

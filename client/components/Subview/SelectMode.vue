@@ -9,10 +9,20 @@
 </template>
 
 <script>
+import chunk from "lodash/chunk";
+
 export default {
-  props: {
-    modes: { type: Array, required: true },
-    onMode: { type: Function, required: true }
+  methods: {
+    onMode: function(mode) {
+      this.$store.commit("play/SET_MODE", {
+        mode
+      });
+    }
+  },
+  computed: {
+    modes() {
+      return chunk(this.$store.state.play.modes, 4);
+    }
   }
 };
 </script>

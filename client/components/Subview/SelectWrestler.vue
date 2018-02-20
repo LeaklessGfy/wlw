@@ -13,16 +13,16 @@
         <app-wrestler
           :index="key1"
           :wrestler="players[key1] ? players[key1] : null"
-          :onClick="onActive"
           :active="active === key1 ? true : false"
+          :onClick="onActive"
         />
       </b-col>
       <b-col>
         <app-wrestler
           :index="key2"
           :wrestler="players[key2] ? players[key2] : null"
-          :onClick="onActive"
           :active="active === key2 ? true : false"
+          :onClick="onActive"
         />
       </b-col>
     </b-row>
@@ -40,13 +40,10 @@
 </template>
 
 <script>
+import chunk from "lodash/chunk";
+
 export default {
   props: {
-    active: { type: String, required: true },
-    players: { type: Object, required: true },
-    wrestlers: { type: Array, required: true },
-    onActive: { type: Function, required: true },
-    onWrestler: { type: Function, required: true },
     onPlay: { type: Function, required: true },
     onBack: { type: Function, required: true }
   },
@@ -56,11 +53,33 @@ export default {
     keys: ["P1", "P2", "CPU1", "CPU2"]
   }),
   methods: {
+    onActive: function(active) {
+      this.$store.commit("play/SET_ACTIVE", {
+        active
+      });
+    },
+    onWrestler: function(wrestler) {
+      this.$store.commit("play/SET_PLAYER", {
+        active: this.active,
+        wrestler
+      });
+    },
     disabledPlay() {
       if (!this.players[this.key1] || !this.players[this.key2]) {
         return true;
       }
       return false;
+    }
+  },
+  computed: {
+    active() {
+      return this.$store.state.play.active;
+    },
+    players() {
+      return this.$store.state.play.players;
+    },
+    wrestlers() {
+      return chunk(this.$store.state.play.wrestlers, 6);
     }
   }
 };
