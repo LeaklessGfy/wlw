@@ -1,6 +1,3 @@
-import modes from "mock/modes";
-import wrestlers from "mock/wrestlers";
-
 const INITIAL = {
   turn: 0,
   viewer: "P1",
@@ -10,8 +7,8 @@ const INITIAL = {
   players: {},
   card: null,
   mode: null,
-  modes: modes,
-  wrestlers: wrestlers
+  modes: [],
+  wrestlers: []
 };
 
 export default {
@@ -42,7 +39,16 @@ export default {
     },
     RESET(state, payload) {
       Object.assign(state, INITIAL);
+    },
+    SET_MODES(state, payload) {
+      state.modes = payload.modes;
+    },
+    SET_WRESTLERS(state, payload) {
+      state.wrestlers = payload.wrestlers;
     }
   },
-  action: {}
+  action: {
+    fetchModes(state) {},
+    fetchWrestlers(state) {}
+  }
 };

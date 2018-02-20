@@ -2,21 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import Play from "./play";
+import Setting from "./setting";
 
 Vue.use(Vuex);
-
-const state = {
-  count: 0
-};
-
-const mutations = {
-  INCREMENT(state) {
-    state.count++;
-  },
-  DECREMENT(state) {
-    state.count--;
-  }
-};
 
 const actions = {
   incrementAsync({ commit }) {
@@ -27,11 +15,9 @@ const actions = {
 };
 
 const store = new Vuex.Store({
-  state,
-  mutations,
-  actions,
   modules: {
-    play: Play
+    play: Play,
+    setting: Setting
   },
   plugins: [createPersistedState()]
 });
