@@ -46,6 +46,14 @@ export default {
     RESET(state, payload) {
       Object.assign(state, INITIAL);
     },
+    RESET_PLAY(state, payload) {
+      Object.assign(state, {
+        turn: 0,
+        targets: [],
+        next: [],
+        card: null
+      });
+    },
     SET_STATE(state, payload) {
       Object.assign(state, payload);
     }

@@ -39,7 +39,7 @@
 
       <!-- CARDS -->
       <b-row class="m-2">
-        <b-col v-for="c in players[viewer].hand" :key="c.uid">
+        <b-col v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
           <app-card
             :card="c"
             :available="viewer === active"
@@ -60,11 +60,12 @@ export default {
     onBack: { type: Function, required: true }
   },
   mounted: function() {
+    this.$store.commit("play/RESET_PLAY");
     this.$store.dispatch("play/distribute");
   },
   methods: {
     onCard(card) {
-      if (!this.playing) return;
+      if (!this.shouldPlay) return;
 
       this.$store.commit("play/SET_CARD", {
         card: card
