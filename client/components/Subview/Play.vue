@@ -23,6 +23,7 @@
 
     <!-- UI -->
     <div class="fixed-bottom ui p-3">
+      <!-- ACTIONS -->
       <b-row>
         <b-col>
           <b-button :disabled="card === null" v-on:click="onCancel">Cancel</b-button>
@@ -35,6 +36,8 @@
           <b-button :disabled="active !== viewer" v-on:click="onSkipTurn">Skip turn</b-button>
         </b-col>
       </b-row>
+
+      <!-- CARDS -->
       <b-row class="m-2">
         <b-col v-for="c in players[viewer].hand" :key="c.uid">
           <app-card
@@ -74,7 +77,7 @@ export default {
     },
     onWrestler(index) {
       if (
-        !this.playing ||
+        !this.shouldPlay ||
         this.card === null ||
         this.targets.length >= this.card.targets.length
       ) {
@@ -94,13 +97,13 @@ export default {
       });
     },
     onPlay() {
-      alert("PLAY");
+      this.$store.dispatch("play/play");
     },
     onSkipTurn() {
       alert("SKIP TURN");
     },
     disabledPlay() {
-      if (!this.playing) return true;
+      if (!this.shouldPlay) return true;
       if (this.card === null) return true;
       if (this.targets.length !== this.card.targets.length) return true;
       return false;
@@ -142,13 +145,13 @@ export default {
       return wrestlers;
     },
     tips() {
-      if (!this.playing) return "Wait";
+      if (!this.shouldPlay) return "Wait";
       if (this.card === null) return "Select card";
       if (this.targets.length < this.card.targets.length)
         return "Select opponent(s)";
       return "Play or Cancel!";
     },
-    playing() {
+    shouldPlay() {
       return this.viewer === this.active;
     }
   }

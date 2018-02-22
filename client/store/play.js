@@ -9,6 +9,14 @@ const INITIAL = {
   mode: null
 };
 
+const makeOptions = data => ({
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
+
 export default {
   namespaced: true,
   state: Object.assign({}, INITIAL),
@@ -46,15 +54,18 @@ export default {
     distribute(ctx) {
       const state = ctx.rootState;
 
-      fetch(state.setting.server + "/cards/distribute", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(state.play)
-      })
+      fetch(state.setting.server + "/cards/distribute", makeOptions(state.play))
         .then(r => r.json())
-        .then(state => ctx.commit("SET_STATE", state));
+        .then(state => ctx.commit("SET_STATE", state))
+        .catch(e => alert(e));
+    },
+    play(ctx) {
+      const state = ctx.rootState;
+
+      fetch(state.setting.server + "/cards/play", makeOptions(state.play))
+        .then(r => r.json())
+        .then(state => ctx.commit("SET_STATE", state))
+        .catch(e => alert(e));
     }
   }
 };
