@@ -56,6 +56,9 @@ export default {
   props: {
     onBack: { type: Function, required: true }
   },
+  mounted: function() {
+    this.$store.dispatch("play/distribute");
+  },
   methods: {
     onCard(card) {
       if (!this.playing) return;

@@ -13,7 +13,7 @@ import chunk from "lodash/chunk";
 
 export default {
   mounted: function() {
-    this.$store.dispatch("play/fetchModes");
+    this.$store.dispatch("api/fetchModes");
   },
   methods: {
     onMode: function(mode) {
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     modes() {
-      return chunk(this.$store.state.play.modes, 4);
+      return chunk(this.$store.state.api.modes, 4);
     }
   }
 };

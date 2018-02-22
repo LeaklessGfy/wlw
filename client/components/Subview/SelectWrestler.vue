@@ -53,7 +53,7 @@ export default {
     keys: ["P1", "P2", "CPU1", "CPU2"]
   }),
   mounted: function() {
-    this.$store.dispatch("play/fetchWrestlers");
+    this.$store.dispatch("api/fetchWrestlers");
   },
   methods: {
     onActive: function(active) {
@@ -82,7 +82,7 @@ export default {
       return this.$store.state.play.players;
     },
     wrestlers() {
-      return chunk(this.$store.state.play.wrestlers, 6);
+      return chunk(this.$store.state.api.wrestlers, 6);
     }
   }
 };

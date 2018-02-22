@@ -6,9 +6,7 @@ const INITIAL = {
   next: [],
   players: {},
   card: null,
-  mode: null,
-  modes: [],
-  wrestlers: []
+  mode: null
 };
 
 export default {
@@ -40,25 +38,23 @@ export default {
     RESET(state, payload) {
       Object.assign(state, INITIAL);
     },
-    SET_MODES(state, payload) {
-      state.modes = payload.modes;
-    },
-    SET_WRESTLERS(state, payload) {
-      state.wrestlers = payload.wrestlers;
+    SET_STATE(state, payload) {
+      Object.assign(state, payload);
     }
   },
   actions: {
-    fetchModes(ctx) {
-      const state = ctx.rootState.setting;
-      fetch(state.server + "/modes")
+    distribute(ctx) {
+      const state = ctx.rootState;
+
+      fetch(state.setting.server + "/cards/distribute", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(state.play)
+      })
         .then(r => r.json())
-        .then(modes => ctx.commit("SET_MODES", { modes }));
-    },
-    fetchWrestlers(ctx) {
-      const state = ctx.rootState.setting;
-      fetch(state.server + "/wrestlers")
-        .then(r => r.json())
-        .then(wrestlers => ctx.commit("SET_WRESTLERS", { wrestlers }));
+        .then(state => ctx.commit("SET_STATE", state));
     }
   }
 };
