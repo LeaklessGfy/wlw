@@ -2,7 +2,7 @@
   <div
     class="app-card"
     v-bind:class="{'available': available, 'selected': selected}"
-    v-on:click="onClick ? onClick(card) : null"
+    v-on:click="onClick ? onClick(index) : null"
   >
     <div class="app-card-header">
       <b-row>
@@ -38,6 +38,7 @@
 <script>
 export default {
   props: {
+    index: { type: Number, required: true },
     card: { type: Object, required: true },
     available: { type: Boolean, required: true },
     selected: { type: Boolean, required: true },

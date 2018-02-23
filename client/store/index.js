@@ -12,8 +12,8 @@ const store = new Vuex.Store({
     api: Api,
     play: Play,
     setting: Setting
-  },
-  plugins: [createPersistedState()]
+  }
+  //plugins: [createPersistedState()]
 });
 
 export default store;

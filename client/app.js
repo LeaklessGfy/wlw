@@ -29,6 +29,7 @@ Vue.component(
   require("./components/Subview/SelectWrestler")
 );
 Vue.component("app-play", require("./components/Subview/Play"));
+Vue.component("app-admin", require("./components/Special/Admin"));
 
 const app = new Vue({
   router,

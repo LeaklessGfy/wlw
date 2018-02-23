@@ -17,10 +17,20 @@ const makeOptions = data => ({
   body: JSON.stringify(data)
 });
 
+const fetchAPI = (url, data, callback) => {
+  fetch(url, makeOptions(data))
+    .then(r => r.json())
+    .then(state => callback(state))
+    .catch(e => alert(e));
+};
+
 export default {
   namespaced: true,
   state: Object.assign({}, INITIAL),
   mutations: {
+    SET_VIEWER(state, payload) {
+      state.viewer = payload.viewer;
+    },
     SET_MODE(state, payload) {
       state.mode = payload.mode;
     },
@@ -46,34 +56,48 @@ export default {
     RESET(state, payload) {
       Object.assign(state, INITIAL);
     },
-    RESET_PLAY(state, payload) {
-      Object.assign(state, {
-        turn: 0,
-        targets: [],
-        next: [],
-        card: null
-      });
-    },
     SET_STATE(state, payload) {
       Object.assign(state, payload);
     }
   },
   actions: {
+    reset(ctx) {
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/states/init";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+        ctx.dispatch("distribute");
+      });
+    },
+    newTurn(ctx) {
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/turns/new";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+        ctx.dispatch("distribute");
+      });
+    },
     distribute(ctx) {
-      const state = ctx.rootState;
-
-      fetch(state.setting.server + "/cards/distribute", makeOptions(state.play))
-        .then(r => r.json())
-        .then(state => ctx.commit("SET_STATE", state))
-        .catch(e => alert(e));
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/cards/distribute";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+        ctx.dispatch("validate");
+      });
+    },
+    validate(ctx) {
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/cards/validate";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+      });
     },
     play(ctx) {
-      const state = ctx.rootState;
-
-      fetch(state.setting.server + "/cards/play", makeOptions(state.play))
-        .then(r => r.json())
-        .then(state => ctx.commit("SET_STATE", state))
-        .catch(e => alert(e));
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/cards/play";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+      });
     }
   }
 };

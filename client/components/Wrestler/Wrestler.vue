@@ -22,21 +22,26 @@
 
       <i
         class="fa fa-circle mt-2"
-        style="color: orange;margin: 0px 1px;"
+        style="color:orange;margin-right:2px;"
         v-for="s in wrestler.stamina.val"
         :key="wrestler.uid + '_s_' + s"
+      /><i
+        class="fa fa-circle mt-2"
+        style="color:dimgrey;margin-right:2px;"
+        v-for="s in wrestler.stamina.max - wrestler.stamina.val"
+        :key="wrestler.uid + '_sm_' + s"
       />
 
       <br/>
 
       <i
         class="fa fa-fire fa-lg mt-2"
-        style="color:red;margin-right: 2px;"
+        style="color:red;margin-right:2px;"
         v-for="i in wrestler.intensity.val"
         :key="wrestler.uid + '_i_' + i"
       /><i
-        class="fa fa-fire fa-lg"
-        style="color:dimgrey;margin-right: 2px;"
+        class="fa fa-fire fa-lg mt-2"
+        style="color:dimgrey;margin-right:2px;"
         v-for="i in wrestler.intensity.max - wrestler.intensity.val"
         :key="wrestler.uid + '_im_' + i"
       />

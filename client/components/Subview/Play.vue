@@ -30,7 +30,7 @@
           <b-button :disabled="disabledPlay()" v-on:click="onPlay" variant="success">Play</b-button>
         </b-col>
         <b-col class="text-white text-center">
-          <p style="font-size: 1.3em;">{{tips}}</p>
+          <p style="font-size:1.3em;">{{tips}}</p>
         </b-col>
         <b-col class="text-right">
           <b-button :disabled="active !== viewer" v-on:click="onSkipTurn">Skip turn</b-button>
@@ -41,9 +41,10 @@
       <b-row class="m-2">
         <b-col v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
           <app-card
+            :index="i"
             :card="c"
             :available="viewer === active"
-            :selected="c === card"
+            :selected="i === card"
             :onClick="onCard"
           />
         </b-col>
@@ -60,15 +61,14 @@ export default {
     onBack: { type: Function, required: true }
   },
   mounted: function() {
-    this.$store.commit("play/RESET_PLAY");
-    this.$store.dispatch("play/distribute");
+    this.$store.dispatch("play/newTurn");
   },
   methods: {
-    onCard(card) {
+    onCard(index) {
       if (!this.shouldPlay) return;
 
       this.$store.commit("play/SET_CARD", {
-        card: card
+        card: index
       });
       this.$store.commit("play/SET_TARGETS", {
         targets: []
@@ -77,11 +77,7 @@ export default {
       // ui helper ?
     },
     onWrestler(index) {
-      if (
-        !this.shouldPlay ||
-        this.card === null ||
-        this.targets.length >= this.card.targets.length
-      ) {
+      if (!this.shouldPlay || this.card === null || !this.shouldSelectTarget) {
         return;
       }
       // Check if index valid target (opponent or self)
@@ -101,12 +97,11 @@ export default {
       this.$store.dispatch("play/play");
     },
     onSkipTurn() {
-      alert("SKIP TURN");
+      this.$store.dispatch("play/newTurn");
     },
     disabledPlay() {
-      if (!this.shouldPlay) return true;
-      if (this.card === null) return true;
-      if (this.targets.length !== this.card.targets.length) return true;
+      if (!this.shouldPlay || this.card === null || this.shouldSelectTarget)
+        return true;
       return false;
     }
   },
@@ -145,15 +140,21 @@ export default {
       }
       return wrestlers;
     },
+    activeCard() {
+      if (this.card === null) return null;
+      return this.players[this.active].hand[this.card];
+    },
     tips() {
-      if (!this.shouldPlay) return "Wait";
-      if (this.card === null) return "Select card";
-      if (this.targets.length < this.card.targets.length)
-        return "Select opponent(s)";
+      if (!this.shouldPlay) return "Wait for your turn";
+      if (this.card === null) return "Select card or skip turn";
+      if (this.shouldSelectTarget) return "Select target(s)";
       return "Play or Cancel!";
     },
     shouldPlay() {
       return this.viewer === this.active;
+    },
+    shouldSelectTarget() {
+      return this.targets.length < this.activeCard.targets.length;
     }
   }
 };
