@@ -79,7 +79,7 @@ export default {
         health = parseInt(health, 10);
         if (health > 100) return;
         this.updatePlayer({
-          health: { val: health }
+          health: { val: health, max: 100 }
         });
       }
     },
@@ -92,7 +92,7 @@ export default {
         stamina = parseInt(stamina, 10);
         if (stamina > 10) return;
         this.updatePlayer({
-          stamina: { val: stamina }
+          stamina: { val: stamina, max: 10 }
         });
       }
     },
@@ -105,7 +105,7 @@ export default {
         intensity = parseInt(intensity, 10);
         if (intensity > 10) return;
         this.updatePlayer({
-          intensity: { val: intensity }
+          intensity: { val: intensity, max: 10 }
         });
       }
     }
