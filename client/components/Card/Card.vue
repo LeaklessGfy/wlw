@@ -49,7 +49,7 @@ export default {
 
 <style>
 .app-card {
-  opacity: 0.5;
+  opacity: 0;
   border-radius: 10px;
   height: 600px;
   width: 250px;
@@ -62,12 +62,9 @@ export default {
 .app-card:hover {
   position: relative;
   cursor: pointer;
-  top: -200px;
+  top: -250px;
 }
 .app-card.available {
-  opacity: 0.7;
-}
-.app-card.available:hover {
   opacity: 1;
 }
 .app-card.selected {

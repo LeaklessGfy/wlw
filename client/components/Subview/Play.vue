@@ -39,7 +39,7 @@
 
       <!-- CARDS -->
       <b-row class="m-2">
-        <b-col v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
+        <b-col cols="1" v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
           <app-card
             :index="i"
             :card="c"
