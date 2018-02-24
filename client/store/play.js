@@ -57,57 +57,19 @@ export default {
     RESET(state, payload) {
       Object.assign(state, INITIAL);
     },
-    SET_STATE(state, payload) {
+    MERGE(state, payload) {
       Object.assign(state, payload);
     }
   },
   actions: {
-    reset(ctx) {
-      const { setting, play } = ctx.rootState;
-      const url = setting.server + "/states/init";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
-        ctx.dispatch("distribute");
-      });
-    },
-    flow(ctx) {
+    flow(ctx, opts) {
       const { setting, play } = ctx.rootState;
       const url = setting.server + "/states/flow";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
+      fetchAPI(url, Object.assign({}, play, opts), state => {
+        ctx.commit("MERGE", state);
         if (state.state === -1) {
           //flow again for ia play
         }
-      });
-    },
-    newTurn(ctx) {
-      const { setting, play } = ctx.rootState;
-      const url = setting.server + "/turns/new";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
-        ctx.dispatch("distribute");
-      });
-    },
-    distribute(ctx) {
-      const { setting, play } = ctx.rootState;
-      const url = setting.server + "/cards/distribute";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
-        ctx.dispatch("validate");
-      });
-    },
-    validate(ctx) {
-      const { setting, play } = ctx.rootState;
-      const url = setting.server + "/cards/validate";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
-      });
-    },
-    play(ctx) {
-      const { setting, play } = ctx.rootState;
-      const url = setting.server + "/cards/play";
-      fetchAPI(url, play, state => {
-        ctx.commit("SET_STATE", state);
       });
     }
   }

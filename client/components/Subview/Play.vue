@@ -43,7 +43,7 @@
           <app-card
             :index="i"
             :card="c"
-            :available="shouldPlay && c.valid"
+            :available="shouldPlay"
             :selected="i === card"
             :onClick="onCard"
           />
@@ -93,10 +93,10 @@ export default {
       });
     },
     onPlay() {
-      this.$store.dispatch("play/play");
+      this.$store.dispatch("play/flow");
     },
     onSkipTurn() {
-      this.$store.dispatch("play/newTurn");
+      this.$store.dispatch("play/flow", { state: 1 });
     },
     disabledPlay() {
       if (!this.shouldPlay || this.card === null || this.shouldSelectTarget)

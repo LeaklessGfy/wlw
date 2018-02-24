@@ -1,7 +1,7 @@
 <template>
   <div
     class="app-card"
-    v-bind:class="{'available': available, 'selected': selected}"
+    v-bind:class="{'available': available, 'selected': selected, 'invalid': !card.valid}"
     v-on:click="onClick ? onClick(index, card) : null"
   >
     <div class="app-card-header">
@@ -49,6 +49,7 @@ export default {
 
 <style>
 .app-card {
+  position: relative;
   opacity: 0;
   border-radius: 10px;
   height: 600px;
@@ -60,15 +61,18 @@ export default {
   transition: top 0.1s ease-in;
 }
 .app-card:hover {
-  position: relative;
   cursor: pointer;
   top: -250px;
+  z-index: 10;
 }
 .app-card.available {
   opacity: 1;
 }
 .app-card.selected {
   box-shadow: 0 4px 8px 2px red, 0 6px 20px 0 red;
+}
+.app-card.invalid {
+  filter: brightness(0.3) grayscale(1);
 }
 .app-card-header {
   padding: 2px;
