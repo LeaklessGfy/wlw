@@ -43,7 +43,7 @@
           <app-card
             :index="i"
             :card="c"
-            :available="viewer === active"
+            :available="shouldPlay && c.valid"
             :selected="i === card"
             :onClick="onCard"
           />
@@ -61,11 +61,11 @@ export default {
     onBack: { type: Function, required: true }
   },
   mounted: function() {
-    this.$store.dispatch("play/newTurn");
+    this.$store.dispatch("play/flow");
   },
   methods: {
-    onCard(index) {
-      if (!this.shouldPlay) return;
+    onCard(index, card) {
+      if (!this.shouldPlay || !card.valid) return;
 
       this.$store.commit("play/SET_CARD", {
         card: index
@@ -73,8 +73,7 @@ export default {
       this.$store.commit("play/SET_TARGETS", {
         targets: []
       });
-      // switch card.targets
-      // ui helper ?
+      // switch card.targets ui helper ? (TARGET_CARDS)
     },
     onWrestler(index) {
       if (!this.shouldPlay || this.card === null || !this.shouldSelectTarget) {

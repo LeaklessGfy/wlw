@@ -6,7 +6,8 @@ const INITIAL = {
   next: [],
   players: {},
   card: null,
-  mode: null
+  mode: null,
+  state: 0
 };
 
 const makeOptions = data => ({
@@ -67,6 +68,16 @@ export default {
       fetchAPI(url, play, state => {
         ctx.commit("SET_STATE", state);
         ctx.dispatch("distribute");
+      });
+    },
+    flow(ctx) {
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/states/flow";
+      fetchAPI(url, play, state => {
+        ctx.commit("SET_STATE", state);
+        if (state.state === -1) {
+          //flow again for ia play
+        }
       });
     },
     newTurn(ctx) {

@@ -2,7 +2,7 @@
   <div
     class="app-card"
     v-bind:class="{'available': available, 'selected': selected}"
-    v-on:click="onClick ? onClick(index) : null"
+    v-on:click="onClick ? onClick(index, card) : null"
   >
     <div class="app-card-header">
       <b-row>
