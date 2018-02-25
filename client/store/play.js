@@ -21,7 +21,13 @@ const makeOptions = data => ({
 const fetchAPI = (url, data, callback) => {
   fetch(url, makeOptions(data))
     .then(r => r.json())
-    .then(state => callback(state))
+    .then(state => {
+      if (state.error) {
+        throw new Error(state.error);
+      }
+
+      callback(state);
+    })
     .catch(e => alert(e));
 };
 

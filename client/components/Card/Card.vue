@@ -87,5 +87,8 @@ export default {
 .app-card-body {
   padding: 0px 10px;
 }
+.app-card-body img {
+  max-height: 155px;
+}
 </style>
 

@@ -39,15 +39,21 @@
 
       <!-- CARDS -->
       <b-row class="m-2">
-        <b-col cols="1" v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
-          <app-card
-            :index="i"
-            :card="c"
-            :available="shouldPlay"
-            :selected="i === card"
-            :onClick="onCard"
-          />
+        <b-col cols="2" />
+        <b-col>
+          <b-row>
+            <b-col cols="1" v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
+              <app-card
+                :index="i"
+                :card="c"
+                :available="shouldPlay"
+                :selected="i === card"
+                :onClick="onCard"
+              />
+            </b-col>
+          </b-row>
         </b-col>
+        <b-col cols="2" />
       </b-row>
     </div>
   </b-container>

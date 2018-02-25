@@ -1,5 +1,7 @@
 <template>
   <b-form>
+    <b-button v-on:click="forceSkip">Force skip</b-button>
+
     <b-form-group label="Viewer" label-for="viewerInput">
       <b-form-select
         id="viewerInput"
@@ -34,6 +36,9 @@
 
 <script>
 export default {
+  props: {
+    hide: Function
+  },
   data: () => {
     return {
       viewers: ["P1", "CPU1"]
@@ -46,6 +51,10 @@ export default {
         active: this.viewer,
         wrestler: wrestler
       });
+    },
+    forceSkip() {
+      this.$store.dispatch("play/flow", { state: 1 });
+      this.hide();
     }
   },
   computed: {
