@@ -3,7 +3,7 @@
 */
 
 body {
-  background: rgb(18, 13, 39) !important;
+  background: rgb(4, 0, 5) !important;
   color: #fff;
 }
 
@@ -37,19 +37,19 @@ h1 {
 }
 
 .btn-success {
-  background-color: #2d9497;
-  border-color: #2d9497;
+  background-color: #d937c0;
+  border-color: #d937c0;
 }
 
 .btn-success:hover {
-  background-color: #2d9497;
-  border-color: #fff;
+  background-color: #d937c0;
+  border-color: #d0b3a4;
 }
 
 .btn-success.disabled,
 .btn-success.disabled:hover {
-  background-color: #2d9497;
-  border-color: #2d9497;
+  background-color: #d937c0;
+  border-color: #d937c0;
 }
 
 /*
@@ -68,7 +68,7 @@ h1 {
 }
 
 .ui {
-  background: #050220;
+  background: #020014;
   height: 140px;
   border-top: 1px solid #8b7469;
 }

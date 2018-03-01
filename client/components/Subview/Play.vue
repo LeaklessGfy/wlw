@@ -99,7 +99,7 @@ export default {
       });
     },
     onPlay() {
-      this.$store.dispatch("play/flow");
+      this.$store.dispatch("play/flow", { state: 5 });
     },
     onSkipTurn() {
       this.$store.dispatch("play/flow", { state: 1 });
