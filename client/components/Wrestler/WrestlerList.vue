@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .wrestler-box {
   margin-top: 20px;
-  border: 1px solid #fff;
+  border-top: 2px solid #d0b3a4;
   height: 400px;
   padding: 5px 15px;
   overflow-y: scroll;

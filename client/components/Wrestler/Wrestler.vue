@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .wrestler {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .wrestler:hover {
   opacity: 1;
@@ -71,7 +71,8 @@ export default {
   cursor: pointer;
 }
 .wrestler.active {
-  border-color: gold;
+  border-color: #d0b3a4;
+  opacity: 1;
 }
 .wrestler.targeted {
   border-color: red;

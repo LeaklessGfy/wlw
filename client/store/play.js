@@ -7,7 +7,8 @@ const INITIAL = {
   players: {},
   card: null,
   mode: null,
-  state: 0
+  state: 0,
+  records: []
 };
 
 const makeOptions = data => ({

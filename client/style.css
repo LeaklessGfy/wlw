@@ -1,0 +1,74 @@
+/*
+** GENERAL
+*/
+
+body {
+  background: rgb(18, 13, 39) !important;
+  color: #fff;
+}
+
+h1 {
+  color: #f793f7;
+}
+
+/*
+** THEME
+*/
+
+.bg-dark {
+  background-color: rgb(13, 7, 31) !important;
+  border-color: rgb(42, 21, 100);
+}
+
+.btn-secondary {
+  background-color: #34164f;
+  border-color: #3d185e;
+}
+
+.btn-secondary:hover {
+  background-color: #421d63;
+  border-color: #4b1f72;
+}
+
+.btn-secondary.disabled,
+.btn-secondary.disabled:hover {
+  background-color: #34164f;
+  border-color: #3d185e;
+}
+
+.btn-success {
+  background-color: #2d9497;
+  border-color: #2d9497;
+}
+
+.btn-success:hover {
+  background-color: #2d9497;
+  border-color: #fff;
+}
+
+.btn-success.disabled,
+.btn-success.disabled:hover {
+  background-color: #2d9497;
+  border-color: #2d9497;
+}
+
+/*
+** OTHER
+*/
+
+.navbar-dark .navbar-brand {
+  text-shadow: #d937c0 0px 0px 7px;
+}
+.navbar.bg-dark {
+  background-color: rgb(13, 7, 31) !important;
+}
+
+.card-header {
+  border-color: rgb(25, 12, 59);
+}
+
+.ui {
+  background: #050220;
+  height: 140px;
+  border-top: 1px solid #8b7469;
+}
