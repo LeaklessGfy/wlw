@@ -54,8 +54,8 @@ export default {
   border-radius: 10px;
   height: 600px;
   width: 250px;
-  border: 3px solid white;
-  background: #343a40;
+  border: 3px solid #d0b3a4;
+  background: rgb(13, 7, 31);
   color: white;
   top: 0;
   transition: top 0.1s ease-in;
@@ -69,7 +69,8 @@ export default {
   opacity: 1;
 }
 .app-card.selected {
-  box-shadow: 0 4px 8px 2px red, 0 6px 20px 0 red;
+  box-shadow: 0 4px 8px 2px #d937c0, 0 0px 20px 0 #d937c0;
+  z-index: 10;
 }
 .app-card.invalid {
   filter: brightness(0.3) grayscale(1);
@@ -89,6 +90,10 @@ export default {
 }
 .app-card-body img {
   max-height: 155px;
+}
+.app-card-body p {
+  margin-top: 10px;
+  padding: 10px;
 }
 </style>
 

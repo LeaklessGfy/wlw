@@ -75,8 +75,7 @@ export default {
   opacity: 1;
 }
 .wrestler.targeted {
-  border-color: red;
-  opacity: 1;
-  filter: sepia(1) saturate(1000%) hue-rotate(-10deg);
+  border-color: #d937c0;
+  box-shadow: 0 0px 8px 2px #d937c0, 0 0px 20px 0 #d937c0;
 }
 </style>
