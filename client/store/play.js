@@ -74,9 +74,6 @@ export default {
       const url = setting.server + "/states/flow";
       fetchAPI(url, Object.assign({}, play, opts), state => {
         ctx.commit("MERGE", state);
-        if (state.state === -1) {
-          //flow again for ia play
-        }
       });
     }
   }
