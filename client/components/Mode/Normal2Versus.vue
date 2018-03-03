@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row class="text-center">
     <b-col>
       <app-wrestler
         :index="wrestlers[0].index"
@@ -14,6 +14,7 @@
       <img
         src="http://img.over-blog-kiwi.com/1/00/19/38/20140927/ob_302629_versus-3af003f.png"
         alt=""
+        width="400px"
       />
     </b-col>
 

@@ -8,7 +8,9 @@
     class="mb-2 text-white mode"
     v-on:click="onClick(mode)"
   >
-    <h4 slot="header">{{mode.name}} <b-badge>{{mode.numbers}}</b-badge></h4>
+    <h4 slot="header">
+      {{mode.name}} <b-badge>{{mode.numbers}}</b-badge>
+    </h4>
     <p class="card-text">
       {{ mode.description }}
     </p>
@@ -25,9 +27,6 @@ export default {
 </script>
 
 <style scoped>
-.mode {
-  opacity: 0.7;
-}
 .mode:hover {
   opacity: 1;
   border-color: #fff;

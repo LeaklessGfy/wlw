@@ -3,7 +3,8 @@
 */
 
 body {
-  background: rgb(4, 0, 5) !important;
+  background: url("http://thepalaceofwisdom.co.uk/wp-content/uploads/2016/01/mania.png")
+    #080b1a !important;
   color: #fff;
 }
 
@@ -16,40 +17,23 @@ h1 {
 */
 
 .bg-dark {
-  background-color: rgb(13, 7, 31) !important;
-  border-color: rgb(42, 21, 100);
+  background-color: #020320 !important;
+  border-color: #75bbf2;
 }
 
-.btn-secondary {
-  background-color: #34164f;
-  border-color: #3d185e;
-}
-
-.btn-secondary:hover {
-  background-color: #421d63;
-  border-color: #4b1f72;
-}
-
+.btn-secondary,
 .btn-secondary.disabled,
-.btn-secondary.disabled:hover {
-  background-color: #34164f;
-  border-color: #3d185e;
+.btn-secondary:hover {
+  background-color: #011a39;
+  border-color: #0abde0;
 }
 
-.btn-success {
-  background-color: #d937c0;
-  border-color: #d937c0;
-}
-
-.btn-success:hover {
-  background-color: #d937c0;
-  border-color: #d0b3a4;
-}
-
+.btn-success,
+.btn-success:hover,
 .btn-success.disabled,
 .btn-success.disabled:hover {
-  background-color: #d937c0;
-  border-color: #d937c0;
+  background-color: #a90f3a;
+  border-color: #f66a94;
 }
 
 /*
@@ -64,11 +48,11 @@ h1 {
 }
 
 .card-header {
-  border-color: rgb(25, 12, 59);
+  border-color: #285b81;
 }
 
 .ui {
-  background: #020014;
+  background: rgb(9, 5, 22);
   height: 140px;
-  border-top: 1px solid #8b7469;
+  border-top: 1px solid #e9c9f2;
 }
