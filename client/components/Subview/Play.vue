@@ -33,7 +33,7 @@
           <p style="font-size:1.3em;">{{tips}}</p>
         </b-col>
         <b-col class="text-right">
-          <b-button :disabled="active !== viewer" v-on:click="onEndTurn">End turn</b-button>
+          <b-button :disabled="active !== viewer" v-on:click="onEndTurn">End Turn</b-button>
         </b-col>
       </b-row>
 

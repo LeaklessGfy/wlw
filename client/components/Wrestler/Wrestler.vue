@@ -67,7 +67,7 @@ export default {
 }
 .wrestler:hover {
   border-color: #fff;
-  cursor: pointer;
+  cursor: crosshair;
 }
 .wrestler:hover .card-img-top {
   background: #fff;
