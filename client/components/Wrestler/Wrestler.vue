@@ -69,12 +69,26 @@ export default {
   border-color: #fff;
   cursor: pointer;
 }
+.wrestler:hover .card-img-top {
+  background: #fff;
+}
+.wrestler .card-img-top {
+  border-bottom: 2px #41526b solid;
+}
 .wrestler.active {
-  border-color: #f6ddfb;
+  border-color: #d3c83f;
+}
+.wrestler.active .card-img-top {
+  border-bottom: 2px #d3c83f solid;
+  background: #d3c83f;
 }
 .wrestler.targeted {
   border-color: #c92965;
   opacity: 1;
   box-shadow: 0 0px 8px 2px #c92965, 0 0px 20px 0 #c92965;
+}
+.wrestler.targeted .card-img-top {
+  border-bottom: 2px #c92965 solid;
+  background: #c92965;
 }
 </style>

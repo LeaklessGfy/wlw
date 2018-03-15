@@ -33,7 +33,7 @@
           <p style="font-size:1.3em;">{{tips}}</p>
         </b-col>
         <b-col class="text-right">
-          <b-button :disabled="active !== viewer" v-on:click="onSkipTurn">Skip turn</b-button>
+          <b-button :disabled="active !== viewer" v-on:click="onEndTurn">End turn</b-button>
         </b-col>
       </b-row>
 
@@ -101,7 +101,7 @@ export default {
     onPlay() {
       this.$store.dispatch("play/flow", { state: 5 });
     },
-    onSkipTurn() {
+    onEndTurn() {
       this.$store.dispatch("play/flow", { state: 1 });
     },
     disabledPlay() {

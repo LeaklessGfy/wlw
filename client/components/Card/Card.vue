@@ -54,16 +54,16 @@ export default {
   border-radius: 10px;
   height: 600px;
   width: 250px;
-  border: 3px solid #e9c9f2;
-  background: linear-gradient(#140e3c, #4f2071);
-  color: white;
+  border: 2px solid #41526b;
+  background: #0d0f17;
   top: 0;
   transition: top 0.1s ease-in;
 }
 .app-card:hover {
   cursor: pointer;
-  top: -250px;
+  top: -300px;
   z-index: 10;
+  border-color: #fff;
 }
 .app-card.available {
   opacity: 1;
@@ -76,8 +76,8 @@ export default {
 }
 .app-card-header {
   padding: 2px;
-  border-bottom: 1px solid grey;
-  margin-bottom: 5px;
+  border-bottom: 1px solid #41526b;
+  margin-bottom: 15px;
   font-size: 1.2em;
 }
 .app-card-header h2 {

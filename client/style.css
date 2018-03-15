@@ -1,15 +1,12 @@
 /*
 ** GENERAL
 */
-
+/* url("http://thepalaceofwisdom.co.uk/wp-content/uploads/2016/01/mania.png")*/
 body {
-  background: url("http://thepalaceofwisdom.co.uk/wp-content/uploads/2016/01/mania.png")
-    #080b1a !important;
+  background: #151519 !important;
   color: #fff;
-}
-
-h1 {
-  color: #f793f7;
+  font-family: gilroyextrabold, lato, "Helvetica Neue", Helvetica, Helvetica,
+    Arial, sans-serif;
 }
 
 /*
@@ -17,15 +14,22 @@ h1 {
 */
 
 .bg-dark {
-  background-color: #020320 !important;
-  border-color: #75bbf2;
+  background-color: #0d0f17 !important;
+  border-color: #41526b;
+  border-width: 2px;
 }
 
 .btn-secondary,
-.btn-secondary.disabled,
+.btn-secondary.disabled {
+  background-color: #0c0f18;
+  border-color: #41526b;
+  border-width: 2px;
+  text-transform: uppercase;
+}
+
 .btn-secondary:hover {
-  background-color: #011a39;
-  border-color: #0abde0;
+  background-color: #0c0f18;
+  border-color: #fff;
 }
 
 .btn-success,
@@ -39,20 +43,17 @@ h1 {
 /*
 ** OTHER
 */
-
-.navbar-dark .navbar-brand {
+.navbar .navbar-brand {
+  font-size: 1.2em;
   text-shadow: #d937c0 0px 0px 7px;
-}
-.navbar.bg-dark {
-  background-color: rgb(13, 7, 31) !important;
 }
 
 .card-header {
-  border-color: #285b81;
+  border-color: #41526b;
 }
 
 .ui {
-  background: rgb(9, 5, 22);
+  background: #0c0f18;
   height: 140px;
-  border-top: 1px solid #e9c9f2;
+  border-top: 2px solid #41526b;
 }

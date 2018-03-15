@@ -9,7 +9,6 @@
           thumbnail
           fluid
           class="wrestler-item"
-          rounded="circle"
           width="75"
           alt="Wrestler image"
         />
@@ -35,8 +34,9 @@ export default {
 }
 .wrestler-item {
   opacity: 0.7;
-  background-color: #05072d !important;
-  border-color: #05072d;
+  background-color: #0c0f18 !important;
+  border-color: #41526b;
+  border-width: 2px;
 }
 .wrestler-item:hover {
   cursor: pointer;
