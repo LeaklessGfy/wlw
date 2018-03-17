@@ -56,27 +56,51 @@
     </div>
 
     <b-modal v-model="modalCard"
-             title="Play card"
-             header-bg-variant="dark"
-             header-text-variant="light"
-             body-bg-variant="dark"
-             body-text-variant="light"
-             centered
-             hide-footer
-             hide-header
-             size="sm"
+      title="Play card"
+      header-bg-variant="dark"
+      header-text-variant="light"
+      body-bg-variant="dark"
+      body-text-variant="light"
+      centered
+      hide-footer
+      hide-header
+      size="sm"
     >
-       <b-container fluid>
-         <div v-if="card !== null">
-            <app-card
-              :index="0"
-              :card="players[active].hand[card]"
-              :available="true"
-              :selected="true"
-            />
-          </div>
-       </b-container>
+      <b-container fluid>
+        <div v-if="card !== null">
+          <app-card
+            :index="0"
+            :card="players[active].hand[card]"
+            :available="true"
+            :selected="true"
+          />
+        </div>
+      </b-container>
     </b-modal>
+
+    <div v-if="modalWinner">
+      <b-modal v-model="modalWinner"
+        title="Winner"
+        header-bg-variant="dark"
+        header-text-variant="light"
+        body-bg-variant="dark"
+        body-text-variant="light"
+        footer-bg-variant="dark"
+      >
+        <b-container fluid>
+            <app-wrestler
+              :index="winner"
+              :wrestler="players[winner]"
+              :active="true"
+            />
+        </b-container>
+        <div slot="modal-footer" class="w-100 text-center">
+          <b-btn size="sm" variant="outline-primary" @click="onBack">
+            Quit
+          </b-btn>
+        </div>
+      </b-modal>
+    </div>
   </b-container>
 </template>
 
@@ -182,12 +206,23 @@ export default {
     mode() {
       return this.$store.state.play.mode;
     },
+    winner() {
+      return this.$store.state.play.winner;
+    },
     modalCard: {
       get() {
         return this.$store.state.ui.modalCard;
       },
       set(modalCard) {
         this.$store.commit("ui/SET_MODAL_CARD", { modalCard });
+      }
+    },
+    modalWinner: {
+      get() {
+        return this.$store.state.ui.modalWinner;
+      },
+      set(modalWinner) {
+        this.$store.commit("ui/SET_MODAL_WINNER", { modalWinner });
       }
     },
     disabled() {

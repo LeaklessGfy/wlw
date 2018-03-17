@@ -9,7 +9,13 @@
     tag="article"
     style="max-width: 20em;"
     class="mb-2 text-center mx-auto wrestler text-white"
-    v-bind:class="{'active': active, 'targeted': targeted, 'partner': partner, 'disabled': disabled}"
+    v-bind:class="{
+      'active': active,
+      'targeted': targeted,
+      'opponent': opponent,
+      'partner': partner,
+      'disabled': disabled
+    }"
   >
     <b-badge>{{ index }}</b-badge>
 
@@ -56,6 +62,7 @@ export default {
     wrestler: Object,
     active: Boolean,
     targeted: Boolean,
+    opponent: Boolean,
     partner: Boolean,
     disabled: Boolean,
     onClick: Function
@@ -68,6 +75,11 @@ export default {
 .wrestler {
   opacity: 0.7;
 }
+.wrestler:hover {
+  opacity: 1;
+  cursor: crosshair;
+  border-color: #fff !important;
+}
 .wrestler .card-img-top {
   border-bottom: 2px #41526b solid;
 }
@@ -76,7 +88,7 @@ export default {
 .wrestler.active,
 .wrestler.active.disabled:hover {
   opacity: 1;
-  border-color: #d3c83f;
+  border-color: #d3c83f !important;
 }
 .wrestler.active .card-img-top,
 .wrestler.active.disabled:hover .card-img-top {
@@ -85,28 +97,26 @@ export default {
 }
 
 /* OPPONENT */
-.wrestler:hover {
-  opacity: 1;
-  cursor: crosshair;
-  border-color: #df4f4c;
+.wrestler.opponent:hover {
+  border-color: #df4f4c !important;
 }
-.wrestler:hover .card-img-top {
+.wrestler.opponent:hover .card-img-top {
   background: #df4f4c;
   border-color: #df4f4c;
 }
-.wrestler.targeted {
+.wrestler.targeted.opponent {
   opacity: 1;
   border-color: #df4f4c; /*#c92965*/
   box-shadow: 0 0px 8px 2px #df4f4c, 0 0px 20px 0 #df4f4c;
 }
-.wrestler.targeted .card-img-top {
+.wrestler.targeted.opponent .card-img-top {
   border-color: #df4f4c;
   background: #df4f4c;
 }
 
 /* PARTENER */
 .wrestler.partner:hover {
-  border-color: #537545;
+  border-color: #537545 !important;
 }
 .wrestler.partner:hover .card-img-top {
   background: #537545;
@@ -127,7 +137,7 @@ export default {
   opacity: 0.2 !important;
 }
 .wrestler.disabled:hover {
-  border-color: #41526b;
+  border-color: #41526b !important;
 }
 .wrestler.disabled:hover .card-img-top {
   background: #0d0f17;

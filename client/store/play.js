@@ -7,7 +7,6 @@ const INITIAL = {
   players: {},
   card: null,
   mode: null,
-  state: 0,
   records: []
 };
 
@@ -63,6 +62,7 @@ export default {
     },
     RESET(state, payload) {
       Object.assign(state, INITIAL);
+      state.winner = null;
     },
     MERGE(state, payload) {
       Object.assign(state, payload);
@@ -89,8 +89,15 @@ export default {
         setTimeout(() => {
           ctx.commit("ui/SET_MODAL_CARD", { modalCard: false }, { root: true });
           ctx.commit("MERGE", state);
+          if (state.winner) {
+            ctx.commit(
+              "ui/SET_MODAL_WINNER",
+              { modalWinner: true },
+              { root: true }
+            );
+          }
         }, 900);
-        if (state.active !== play.viewer) {
+        if (!state.winner && state.active !== play.viewer) {
           const action = state.card !== null ? "play" : "newTurn";
           setTimeout(() => ctx.dispatch(action), 1900);
         }

@@ -17,6 +17,7 @@ export default {
     },
     back: function() {
       this.$store.commit("play/RESET");
+      this.$store.commit("ui/RESET");
       this.ready = false;
     }
   },

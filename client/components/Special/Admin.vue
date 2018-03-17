@@ -1,6 +1,6 @@
 <template>
-  <b-form>
-    <b-button v-on:click="forceSkip">Force skip</b-button>
+  <b-form class="text-dark">
+    <b-button v-on:click="forceValid">Force valid</b-button>
 
     <b-form-group label="Viewer" label-for="viewerInput">
       <b-form-select
@@ -52,8 +52,16 @@ export default {
         wrestler: wrestler
       });
     },
-    forceSkip() {
-      this.$store.dispatch("play/flow", { state: 1 });
+    forceValid() {
+      const hand = this.wrestler.hand.map(c => {
+        c.valid = true;
+        return c;
+      });
+      const wrestler = Object.assign({}, this.wrestler, { hand });
+      this.$store.commit("play/SET_PLAYER", {
+        active: this.viewer,
+        wrestler: wrestler
+      });
       this.hide();
     }
   },
