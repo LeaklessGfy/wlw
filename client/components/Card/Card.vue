@@ -52,8 +52,8 @@ export default {
   position: relative;
   opacity: 0;
   border-radius: 10px;
-  height: 600px;
-  width: 250px;
+  height: 400px;
+  width: 300px;
   border: 2px solid #41526b;
   background: #0d0f17;
   top: 0;
@@ -73,6 +73,7 @@ export default {
 }
 .app-card.invalid {
   filter: brightness(0.3) grayscale(1);
+  opacity: 0.4;
 }
 .app-card-header {
   padding: 2px;

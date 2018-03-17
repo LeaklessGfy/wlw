@@ -16,8 +16,6 @@
     <component
       :is="child"
       v-bind:wrestlers="wrestlers"
-      v-bind:active="active"
-      v-bind:targets="targets"
       v-bind:onClick="onWrestler"
     />
 
@@ -27,7 +25,7 @@
       <b-row>
         <b-col>
           <b-button :disabled="disabledCancel()" v-on:click="onCancel">Cancel</b-button>
-          <b-button :disabled="disabledPlay()" v-on:click="onPlay" variant="success">Play</b-button>
+          <b-button :disabled="disabledPlay()" v-on:click="onPlay" variant="outline-success">Play</b-button>
         </b-col>
         <b-col class="text-white text-center">
           <p style="font-size:1.3em;">{{tips}}</p>
@@ -102,16 +100,37 @@ export default {
       this.$store.commit("play/SET_TARGETS", {
         targets: []
       });
+
+      let disabled = [];
+      for (let t of card.targets) {
+        switch (t) {
+          case 0:
+            disabled = this.opponents;
+            break;
+          case 1:
+            disabled = this.partners;
+            break;
+        }
+      }
+
+      this.$store.commit("ui/SET_DISABLED", { disabled });
       // switch card.targets ui helper ? (TARGET_CARDS)
     },
     onWrestler(index) {
       if (!this.shouldPlay || this.card === null || !this.shouldSelectTarget) {
         return;
       }
+      if (this.disabled.find(d => d === index)) {
+        return;
+      }
       // Check if index valid target (opponent or self)
       this.$store.commit("play/ADD_TARGET", {
         target: index
       });
+
+      if (!this.shouldSelectTarget) {
+        this.$store.commit("ui/SET_DISABLED", { disabled: [] });
+      }
     },
     onCancel() {
       this.$store.commit("play/SET_CARD", {
@@ -120,6 +139,7 @@ export default {
       this.$store.commit("play/SET_TARGETS", {
         targets: []
       });
+      this.$store.commit("ui/SET_DISABLED", { disabled: [] });
     },
     onPlay() {
       this.$store.dispatch("play/play");
@@ -170,6 +190,9 @@ export default {
         this.$store.commit("ui/SET_MODAL_CARD", { modalCard });
       }
     },
+    disabled() {
+      return this.$store.state.ui.disabled;
+    },
     child() {
       return require("../Mode/" + this.mode.uid);
     },
@@ -186,7 +209,7 @@ export default {
     },
     tips() {
       if (!this.shouldPlay) return "Wait for your turn";
-      if (this.card === null) return "Select card or skip turn";
+      if (this.card === null) return "Select card or end turn";
       if (this.shouldSelectTarget) return "Select target(s)";
       return "Play or Cancel!";
     },
@@ -195,6 +218,18 @@ export default {
     },
     shouldSelectTarget() {
       return this.targets.length < this.activeCard.targets.length;
+    },
+    opponents() {
+      if (this.mode.team) {
+        return;
+      }
+      return Object.keys(this.players).filter(k => k !== this.viewer);
+    },
+    partners() {
+      if (this.mode.team) {
+        return;
+      }
+      return [this.viewer];
     }
   }
 };

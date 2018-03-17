@@ -20,7 +20,8 @@ body {
 }
 
 .btn-secondary,
-.btn-secondary.disabled {
+.btn-secondary.disabled,
+.btn-secondary.disabled:hover {
   background-color: #0c0f18;
   border-color: #41526b;
   border-width: 2px;

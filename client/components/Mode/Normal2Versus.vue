@@ -6,6 +6,8 @@
         :wrestler="wrestlers[0].wrestler"
         :active="wrestlers[0].index === active"
         :targeted="isTargeted(wrestlers[0].index)"
+        :partner="wrestlers[0].index === active"
+        :disabled="isDisabled(wrestlers[0].index)"
         :onClick="onClick"
       />        
     </b-col>
@@ -24,6 +26,8 @@
         :wrestler="wrestlers[1].wrestler"
         :active="wrestlers[1].index === active"
         :targeted="isTargeted(wrestlers[1].index)"
+        :partner="wrestlers[1].index === active"
+        :disabled="isDisabled(wrestlers[1].index)"
         :onClick="onClick"
       />
     </b-col>
@@ -34,13 +38,25 @@
 export default {
   props: {
     wrestlers: { type: Array, required: true },
-    active: { type: String, required: true },
-    targets: { type: Array, required: true },
     onClick: Function
   },
   methods: {
     isTargeted(index) {
-      return this.targets.filter(target => target === index).length > 0;
+      return this.targets.find(target => target === index) !== undefined;
+    },
+    isDisabled(index) {
+      return this.disabled.find(disabled => disabled === index) !== undefined;
+    }
+  },
+  computed: {
+    active() {
+      return this.$store.state.play.active;
+    },
+    targets() {
+      return this.$store.state.play.targets;
+    },
+    disabled() {
+      return this.$store.state.ui.disabled;
     }
   }
 };

@@ -30,7 +30,7 @@
     <!-- PLAY -->
     <b-row class="mt-2">
       <b-col class="text-center">
-        <b-button :disabled="disabledPlay()" variant="success" v-on:click="onPlay()">Play</b-button>
+        <b-button :disabled="disabledPlay()" variant="outline-success" v-on:click="onPlay()">Play</b-button>
       </b-col>
     </b-row>
 
