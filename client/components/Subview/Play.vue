@@ -26,7 +26,7 @@
       <!-- ACTIONS -->
       <b-row>
         <b-col>
-          <b-button :disabled="card === null" v-on:click="onCancel">Cancel</b-button>
+          <b-button :disabled="disabledCancel()" v-on:click="onCancel">Cancel</b-button>
           <b-button :disabled="disabledPlay()" v-on:click="onPlay" variant="success">Play</b-button>
         </b-col>
         <b-col class="text-white text-center">
@@ -56,6 +56,29 @@
         <b-col cols="2" />
       </b-row>
     </div>
+
+    <b-modal v-model="modalCard"
+             title="Play card"
+             header-bg-variant="dark"
+             header-text-variant="light"
+             body-bg-variant="dark"
+             body-text-variant="light"
+             centered
+             hide-footer
+             hide-header
+             size="sm"
+    >
+       <b-container fluid>
+         <div v-if="card !== null">
+            <app-card
+              :index="0"
+              :card="players[active].hand[card]"
+              :available="true"
+              :selected="true"
+            />
+          </div>
+       </b-container>
+    </b-modal>
   </b-container>
 </template>
 
@@ -67,7 +90,7 @@ export default {
     onBack: { type: Function, required: true }
   },
   mounted: function() {
-    this.$store.dispatch("play/flow");
+    this.$store.dispatch("play/newTurn");
   },
   methods: {
     onCard(index, card) {
@@ -99,10 +122,14 @@ export default {
       });
     },
     onPlay() {
-      this.$store.dispatch("play/flow", { state: 5 });
+      this.$store.dispatch("play/play");
     },
     onEndTurn() {
-      this.$store.dispatch("play/flow", { state: 1 });
+      this.$store.dispatch("play/newTurn");
+    },
+    disabledCancel() {
+      if (!this.shouldPlay || this.card === null) return true;
+      return false;
     },
     disabledPlay() {
       if (!this.shouldPlay || this.card === null || this.shouldSelectTarget)
@@ -134,6 +161,14 @@ export default {
     },
     mode() {
       return this.$store.state.play.mode;
+    },
+    modalCard: {
+      get() {
+        return this.$store.state.ui.modalCard;
+      },
+      set(modalCard) {
+        this.$store.commit("ui/SET_MODAL_CARD", { modalCard });
+      }
     },
     child() {
       return require("../Mode/" + this.mode.uid);

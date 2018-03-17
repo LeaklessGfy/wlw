@@ -69,11 +69,31 @@ export default {
     }
   },
   actions: {
-    flow(ctx, opts) {
+    newTurn(ctx) {
       const { setting, play } = ctx.rootState;
-      const url = setting.server + "/states/flow";
-      fetchAPI(url, Object.assign({}, play, opts), state => {
+      const url = setting.server + "/turns/new";
+      fetchAPI(url, play, state => {
         ctx.commit("MERGE", state);
+        if (state.active !== play.viewer) {
+          const action = state.card !== null ? "play" : "newTurn";
+          setTimeout(() => ctx.dispatch(action), 1000);
+        }
+      });
+    },
+    play(ctx) {
+      const { setting, play } = ctx.rootState;
+      const url = setting.server + "/cards/play";
+
+      fetchAPI(url, play, state => {
+        ctx.commit("ui/SET_MODAL_CARD", { modalCard: true }, { root: true });
+        setTimeout(() => {
+          ctx.commit("ui/SET_MODAL_CARD", { modalCard: false }, { root: true });
+          ctx.commit("MERGE", state);
+        }, 900);
+        if (state.active !== play.viewer) {
+          const action = state.card !== null ? "play" : "newTurn";
+          setTimeout(() => ctx.dispatch(action), 1900);
+        }
       });
     }
   }

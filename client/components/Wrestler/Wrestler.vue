@@ -7,7 +7,7 @@
     img-top
     bg-variant="dark"
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 20em;"
     class="mb-2 text-center mx-auto wrestler text-white"
     v-bind:class="{'active': active, 'targeted': targeted}"
   >
