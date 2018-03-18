@@ -32,6 +32,31 @@ const fetchAPI = (url, data, callback) => {
     .catch(e => alert(e));
 };
 
+const postPlay = (ctx, notify, state) => {
+  ctx.commit("ui/SET_MODAL_CARD", { modalCard: false }, { root: true });
+
+  state.records.forEach(record => {
+    let title = "Touch";
+    if (record.val === 1) title = "Dodge";
+    else if (record.val === 2) title = "Reverse";
+
+    notify({
+      group: record.key,
+      title: title,
+      duration: 500
+    });
+  });
+
+  ctx.commit("MERGE", state);
+
+  if (state.winner) {
+    ctx.commit("ui/SET_MODAL_WINNER", { modalWinner: true }, { root: true });
+  } else if (state.active !== state.viewer) {
+    const action = state.card !== null ? "play" : "newTurn";
+    setTimeout(() => ctx.dispatch(action, notify), 900);
+  }
+};
+
 export default {
   namespaced: true,
   state: Object.assign({}, INITIAL),
@@ -70,38 +95,25 @@ export default {
     }
   },
   actions: {
-    newTurn(ctx) {
+    newTurn(ctx, notify) {
       const { setting, play } = ctx.rootState;
       const url = setting.server + "/turns/new";
+
       fetchAPI(url, play, state => {
         ctx.commit("MERGE", state);
         if (state.active !== play.viewer) {
           const action = state.card !== null ? "play" : "newTurn";
-          setTimeout(() => ctx.dispatch(action), 1000);
+          setTimeout(() => ctx.dispatch(action, notify), 1000);
         }
       });
     },
-    play(ctx) {
+    play(ctx, notify) {
       const { setting, play } = ctx.rootState;
       const url = setting.server + "/cards/play";
 
       fetchAPI(url, play, state => {
         ctx.commit("ui/SET_MODAL_CARD", { modalCard: true }, { root: true });
-        setTimeout(() => {
-          ctx.commit("ui/SET_MODAL_CARD", { modalCard: false }, { root: true });
-          ctx.commit("MERGE", state);
-          if (state.winner) {
-            ctx.commit(
-              "ui/SET_MODAL_WINNER",
-              { modalWinner: true },
-              { root: true }
-            );
-          }
-        }, 900);
-        if (!state.winner && state.active !== play.viewer) {
-          const action = state.card !== null ? "play" : "newTurn";
-          setTimeout(() => ctx.dispatch(action), 1900);
-        }
+        setTimeout(() => postPlay(ctx, notify, state), 900);
       });
     }
   }

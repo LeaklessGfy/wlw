@@ -1,5 +1,11 @@
 <template>
   <b-container fluid class="mt-3">
+    <notifications group="card::status" position="top center">
+      <template slot="body" slot-scope="props">
+        <b-alert show class="bg-dark text-white mt-4">{{props.item.title}}</b-alert>
+      </template>
+    </notifications>
+
     <!-- HEADER -->
     <b-row class="mb-2">
       <b-col>
@@ -14,98 +20,27 @@
     </b-row>
 
     <!-- MAIN -->
-    <component
-      :is="child"
-      v-bind:wrestlers="wrestlers"
-      v-bind:onClick="onWrestler"
-    />
+    <component :is="child" v-bind:onClick="onWrestler" />
 
     <!-- UI -->
     <div class="fixed-bottom ui p-3">
       <!-- ACTIONS -->
-      <b-row>
-        <b-col>
-          <b-button :disabled="disabledCancel()" v-on:click="onCancel">Cancel</b-button>
-        </b-col>
-        <b-col class="text-center">
-          <p style="font-size:1.3em;">{{tips}}</p>
-        </b-col>
-        <b-col class="text-right">
-          <b-button :disabled="active !== viewer" v-on:click="onEndTurn">End Turn</b-button>
-        </b-col>
-      </b-row>
+      <app-actions :onCancel="onCancel" :onEndTurn="onEndTurn" />
 
       <!-- CARDS -->
       <b-row class="m-2">
         <b-col cols="2" />
-        <b-col>
-          <b-row>
-            <b-col cols="1" v-for="(c, i) in players[viewer].hand" :key="c.uid + i">
-              <app-card
-                :index="i"
-                :card="c"
-                :available="shouldPlay"
-                :selected="i === card"
-                :onClick="onCard"
-              />
-            </b-col>
-          </b-row>
-        </b-col>
+        <b-col><app-card-list :onCard="onCard" /></b-col>
         <b-col cols="2" />
       </b-row>
     </div>
 
-    <b-modal v-model="modalCard"
-      title="Play card"
-      header-bg-variant="dark"
-      header-text-variant="light"
-      body-bg-variant="dark"
-      body-text-variant="light"
-      centered
-      hide-footer
-      hide-header
-      size="sm"
-    >
-      <b-container fluid>
-        <div v-if="card !== null">
-          <app-card
-            :index="0"
-            :card="players[active].hand[card]"
-            :available="true"
-            :selected="true"
-          />
-        </div>
-      </b-container>
-    </b-modal>
-
-    <div v-if="modalWinner">
-      <b-modal v-model="modalWinner"
-        title="Winner"
-        header-bg-variant="dark"
-        header-text-variant="light"
-        body-bg-variant="dark"
-        body-text-variant="light"
-        footer-bg-variant="dark"
-      >
-        <b-container fluid>
-            <app-wrestler
-              :index="winner"
-              :wrestler="players[winner]"
-              :active="true"
-            />
-        </b-container>
-        <div slot="modal-footer" class="w-100 text-center">
-          <b-btn size="sm" variant="outline-primary" @click="onBack">
-            Quit
-          </b-btn>
-        </div>
-      </b-modal>
-    </div>
+    <app-card-modal />
+    <app-wrestler-modal :onRetry="onRetry" :onBack="onBack" />
   </b-container>
 </template>
 
 <script>
-import keys from "lodash/keys";
 import { mapState } from "vuex";
 
 export default {
@@ -113,11 +48,11 @@ export default {
     onBack: { type: Function, required: true }
   },
   mounted: function() {
-    this.$store.dispatch("play/newTurn");
+    this.$store.dispatch("play/newTurn", this.$notify);
   },
   methods: {
     onCard(index, card) {
-      if (!this.shouldPlay || !card.valid) return;
+      if (this.viewer !== this.active || !card.valid) return;
       if (index === this.card) {
         return this.onCancel();
       }
@@ -141,20 +76,22 @@ export default {
       // switch card.targets ui helper ? (TARGET_CARDS)
     },
     onWrestler(index) {
-      if (!this.shouldPlay || this.card === null || !this.shouldSelectTarget) {
+      if (
+        this.viewer !== this.active ||
+        this.card === null ||
+        !this.shouldSelectTarget
+      ) {
         return;
       }
       if (this.disabled.find(d => d === index)) {
         return;
       }
-      // Check if index valid target (opponent or self)
       this.$store.commit("play/ADD_TARGET", {
         target: index
       });
-
       if (!this.shouldSelectTarget) {
         this.$store.commit("ui/SET_DISABLED", { disabled: [] });
-        this.$store.dispatch("play/play");
+        this.$store.dispatch("play/play", this.$notify);
       }
     },
     onCancel() {
@@ -167,16 +104,10 @@ export default {
       this.$store.commit("ui/SET_DISABLED", { disabled: [] });
     },
     onEndTurn() {
-      this.$store.dispatch("play/newTurn");
+      this.$store.dispatch("play/newTurn", this.$notify);
     },
-    disabledCancel() {
-      if (!this.shouldPlay || this.card === null) return true;
-      return false;
-    },
-    disabledPlay() {
-      if (!this.shouldPlay || this.card === null || this.shouldSelectTarget)
-        return true;
-      return false;
+    onRetry() {
+      //this.$store.dispatch("play/retry");
     }
   },
   computed: {
@@ -186,53 +117,18 @@ export default {
       active: s => s.active,
       players: s => s.players,
       targets: s => s.targets,
-      baseNext: s => s.baseNext,
-      next: s => s.next,
       card: s => s.card,
-      mode: s => s.mode,
-      winner: s => s.winner
+      mode: s => s.mode
     }),
-    modalCard: {
-      get() {
-        return this.$store.state.ui.modalCard;
-      },
-      set(modalCard) {
-        this.$store.commit("ui/SET_MODAL_CARD", { modalCard });
-      }
-    },
-    modalWinner: {
-      get() {
-        return this.$store.state.ui.modalWinner;
-      },
-      set(modalWinner) {
-        this.$store.commit("ui/SET_MODAL_WINNER", { modalWinner });
-      }
-    },
     disabled() {
       return this.$store.state.ui.disabled;
     },
     child() {
       return require("../Mode/" + this.mode.uid);
     },
-    wrestlers() {
-      const wrestlers = [];
-      for (let key of keys(this.players)) {
-        wrestlers.push({ index: key, wrestler: this.players[key] });
-      }
-      return wrestlers;
-    },
     activeCard() {
       if (this.card === null) return null;
       return this.players[this.active].hand[this.card];
-    },
-    tips() {
-      if (!this.shouldPlay) return "Wait for your turn";
-      if (this.card === null) return "Select card or end turn";
-      if (this.shouldSelectTarget) return "Select target(s)";
-      return "Play or Cancel!";
-    },
-    shouldPlay() {
-      return this.viewer === this.active;
     },
     shouldSelectTarget() {
       return this.targets.length < this.activeCard.targets.length;

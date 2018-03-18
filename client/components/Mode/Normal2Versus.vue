@@ -37,9 +37,11 @@
 </template>
 
 <script>
+import keys from "lodash/keys";
+import { mapState } from "vuex";
+
 export default {
   props: {
-    wrestlers: { type: Array, required: true },
     onClick: Function
   },
   methods: {
@@ -51,14 +53,20 @@ export default {
     }
   },
   computed: {
-    active() {
-      return this.$store.state.play.active;
-    },
-    targets() {
-      return this.$store.state.play.targets;
-    },
+    ...mapState("play", {
+      active: s => s.active,
+      targets: s => s.targets,
+      players: s => s.players
+    }),
     disabled() {
       return this.$store.state.ui.disabled;
+    },
+    wrestlers() {
+      const wrestlers = [];
+      for (let key of keys(this.players)) {
+        wrestlers.push({ index: key, wrestler: this.players[key] });
+      }
+      return wrestlers;
     }
   }
 };
