@@ -7,6 +7,7 @@
       </b-col>
       <b-col class="text-center">
         <em>Turn n: {{turn}}</em>
+        <app-wrestler-turn />
       </b-col>
       <b-col>
       </b-col>
@@ -25,9 +26,8 @@
       <b-row>
         <b-col>
           <b-button :disabled="disabledCancel()" v-on:click="onCancel">Cancel</b-button>
-          <b-button :disabled="disabledPlay()" v-on:click="onPlay" variant="outline-success">Play</b-button>
         </b-col>
-        <b-col class="text-white text-center">
+        <b-col class="text-center">
           <p style="font-size:1.3em;">{{tips}}</p>
         </b-col>
         <b-col class="text-right">
@@ -106,6 +106,7 @@
 
 <script>
 import keys from "lodash/keys";
+import { mapState } from "vuex";
 
 export default {
   props: {
@@ -117,24 +118,23 @@ export default {
   methods: {
     onCard(index, card) {
       if (!this.shouldPlay || !card.valid) return;
-
+      if (index === this.card) {
+        return this.onCancel();
+      }
       this.$store.commit("play/SET_CARD", {
         card: index
       });
       this.$store.commit("play/SET_TARGETS", {
         targets: []
       });
-
       let disabled = [];
-      for (let t of card.targets) {
-        switch (t) {
-          case 0:
-            disabled = this.opponents;
-            break;
-          case 1:
-            disabled = this.partners;
-            break;
-        }
+      switch (card.targets[this.targets.length]) {
+        case 0:
+          disabled = this.opponents;
+          break;
+        case 1:
+          disabled = this.partners;
+          break;
       }
 
       this.$store.commit("ui/SET_DISABLED", { disabled });
@@ -154,6 +154,7 @@ export default {
 
       if (!this.shouldSelectTarget) {
         this.$store.commit("ui/SET_DISABLED", { disabled: [] });
+        this.$store.dispatch("play/play");
       }
     },
     onCancel() {
@@ -164,9 +165,6 @@ export default {
         targets: []
       });
       this.$store.commit("ui/SET_DISABLED", { disabled: [] });
-    },
-    onPlay() {
-      this.$store.dispatch("play/play");
     },
     onEndTurn() {
       this.$store.dispatch("play/newTurn");
@@ -182,33 +180,18 @@ export default {
     }
   },
   computed: {
-    viewer() {
-      return this.$store.state.play.viewer;
-    },
-    turn() {
-      return this.$store.state.play.turn;
-    },
-    active() {
-      return this.$store.state.play.active;
-    },
-    players() {
-      return this.$store.state.play.players;
-    },
-    targets() {
-      return this.$store.state.play.targets;
-    },
-    next() {
-      return this.$store.state.play.next;
-    },
-    card() {
-      return this.$store.state.play.card;
-    },
-    mode() {
-      return this.$store.state.play.mode;
-    },
-    winner() {
-      return this.$store.state.play.winner;
-    },
+    ...mapState("play", {
+      viewer: s => s.viewer,
+      turn: s => s.turn,
+      active: s => s.active,
+      players: s => s.players,
+      targets: s => s.targets,
+      baseNext: s => s.baseNext,
+      next: s => s.next,
+      card: s => s.card,
+      mode: s => s.mode,
+      winner: s => s.winner
+    }),
     modalCard: {
       get() {
         return this.$store.state.ui.modalCard;

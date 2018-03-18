@@ -15,6 +15,7 @@ sync(store, router);
 Vue.component("app-nav", require("./components/Common/Navbar"));
 Vue.component("app-mode", require("./components/Mode/Mode"));
 Vue.component("app-wrestler", require("./components/Wrestler/Wrestler"));
+Vue.component("app-wrestler-img", require("./components/Wrestler/WrestlerImg"));
 Vue.component(
   "app-wrestler-list",
   require("./components/Wrestler/WrestlerList")
@@ -22,6 +23,10 @@ Vue.component(
 Vue.component(
   "app-wrestler-stat",
   require("./components/Wrestler/WrestlerStat")
+);
+Vue.component(
+  "app-wrestler-turn",
+  require("./components/Wrestler/WrestlerTurn")
 );
 Vue.component("app-card", require("./components/Card/Card"));
 Vue.component("app-select-mode", require("./components/Subview/SelectMode"));

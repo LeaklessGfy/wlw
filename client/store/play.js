@@ -3,6 +3,7 @@ const INITIAL = {
   viewer: "P1",
   active: "P1",
   targets: [],
+  baseNext: [],
   next: [],
   players: {},
   card: null,

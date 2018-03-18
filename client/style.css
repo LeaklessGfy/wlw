@@ -28,8 +28,19 @@ body {
 }
 
 .btn-secondary:hover {
-  background-color: #0c0f18;
-  border-color: #fff;
+  background-color: #41526b;
+  border-color: #41526b;
+}
+
+.active,
+.active.disabled:hover {
+  opacity: 1;
+  border-color: #d3c83f !important;
+}
+.active .card-img-top,
+.active.disabled:hover .card-img-top {
+  border-color: #d3c83f;
+  background: #d3c83f;
 }
 
 /*

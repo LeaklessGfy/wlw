@@ -73,7 +73,6 @@ export default {
 }
 .app-card.invalid {
   filter: brightness(0.3) grayscale(1);
-  opacity: 0.4;
 }
 .app-card-header {
   padding: 2px;
