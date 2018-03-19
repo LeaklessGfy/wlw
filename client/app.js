@@ -37,12 +37,12 @@ Vue.component(
 Vue.component("app-card", require("./components/Card/Card"));
 Vue.component("app-card-list", require("./components/Card/CardList"));
 Vue.component("app-card-modal", require("./components/Card/CardModal"));
-Vue.component("app-select-mode", require("./components/Subview/SelectMode"));
+Vue.component("app-select-mode", require("./components/Scene/SelectMode"));
 Vue.component(
   "app-select-wrestler",
-  require("./components/Subview/SelectWrestler")
+  require("./components/Scene/SelectWrestler")
 );
-Vue.component("app-play", require("./components/Subview/Play"));
+Vue.component("app-play", require("./components/Scene/Play"));
 Vue.component("app-actions", require("./components/Special/Actions"));
 Vue.component("app-admin", require("./components/Special/Admin"));
 
