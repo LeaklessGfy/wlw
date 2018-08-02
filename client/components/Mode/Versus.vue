@@ -2,13 +2,13 @@
   <b-row class="text-center">
     <b-col>
       <app-wrestler
-        :index="wrestlers[0].index"
+        :index="0"
         :wrestler="wrestlers[0].wrestler"
-        :active="wrestlers[0].index === active"
-        :targeted="isTargeted(wrestlers[0].index)"
-        :opponent="wrestlers[0].index !== active"
-        :partner="wrestlers[0].index === active"
-        :disabled="isDisabled(wrestlers[0].index)"
+        :active="0 === active"
+        :targeted="isTargeted(0)"
+        :opponent="0 !== active"
+        :partner="0 === active"
+        :disabled="isDisabled(0)"
         :onClick="onClick"
       />        
     </b-col>
@@ -23,13 +23,13 @@
 
     <b-col>
       <app-wrestler
-        :index="wrestlers[1].index"
+        :index="1"
         :wrestler="wrestlers[1].wrestler"
-        :active="wrestlers[1].index === active"
-        :targeted="isTargeted(wrestlers[1].index)"
-        :opponent="wrestlers[1].index !== active"
-        :partner="wrestlers[1].index === active"
-        :disabled="isDisabled(wrestlers[1].index)"
+        :active="1 === active"
+        :targeted="isTargeted(1)"
+        :opponent="1 !== active"
+        :partner="1 === active"
+        :disabled="isDisabled(1)"
         :onClick="onClick"
       />
     </b-col>

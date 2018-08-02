@@ -2,7 +2,7 @@
   <table class="mx-auto">
     <tr>
       <td v-for="(n, i) in allNext" :key="i">
-        <app-wrestler-img :src="players[n].img" :title="n" :active="isActive(n, i)" />
+        <app-wrestler-img :src="players[n].image" :title="n" :active="isActive(n, i)" />
       </td>
     </tr>
   </table>

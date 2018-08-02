@@ -48,9 +48,9 @@ export default {
     onBack: { type: Function, required: true }
   },
   data: () => ({
-    key1: "P1",
-    key2: "CPU1",
-    keys: ["P1", "P2", "CPU1", "CPU2"]
+    key1: 0,
+    key2: 1,
+    keys: [0, 1]
   }),
   mounted: function() {
     this.$store.dispatch("api/fetchWrestlers");

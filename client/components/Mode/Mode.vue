@@ -1,6 +1,6 @@
 <template>
   <b-card
-    :img-src="mode.img"
+    :img-src="mode.image"
     img-top
     bg-variant="dark"
     img-alt="Mode image"
@@ -9,7 +9,7 @@
     v-on:click="onClick(mode)"
   >
     <h4 slot="header">
-      {{mode.name}} <b-badge>{{mode.numbers}}</b-badge>
+      {{ mode.name }} <b-badge>{{ mode.numberPlayer }}</b-badge>
     </h4>
     <p class="card-text">
       {{ mode.description }}

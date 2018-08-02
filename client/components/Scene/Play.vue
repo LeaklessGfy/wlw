@@ -124,7 +124,8 @@ export default {
       return this.$store.state.ui.disabled;
     },
     child() {
-      return require("../Mode/" + this.mode.uid);
+      return require("../Mode/" +
+        this.mode.uid.replace(/^\w/, c => c.toUpperCase()));
     },
     activeCard() {
       if (this.card === null) return null;

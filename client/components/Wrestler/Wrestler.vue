@@ -1,7 +1,7 @@
 <template>
   <b-card 
     :title="wrestler ? wrestler.name : 'Select'"
-    :img-src="wrestler ? wrestler.img : 'https://lh3.googleusercontent.com/EnHBPZtxV0Gkj_bVGADHHgqnEXE2PXtKYF4Rclovs0SJjO8n6vm60Y6Qxc0G1DqBn4k=w300'"
+    :img-src="wrestler ? wrestler.image : 'https://lh3.googleusercontent.com/EnHBPZtxV0Gkj_bVGADHHgqnEXE2PXtKYF4Rclovs0SJjO8n6vm60Y6Qxc0G1DqBn4k=w300'"
     v-on:click="onClick ? onClick(index, wrestler) : null"
     img-alt="Image"
     img-top
@@ -58,7 +58,7 @@
 <script>
 export default {
   props: {
-    index: String,
+    index: Number,
     wrestler: Object,
     active: Boolean,
     targeted: Boolean,

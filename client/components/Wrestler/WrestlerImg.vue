@@ -19,7 +19,7 @@
 export default {
   props: {
     src: { type: String, required: true },
-    title: { type: String, required: true },
+    title: { type: String | Number, required: true },
     active: Boolean,
     onClick: Function
   }

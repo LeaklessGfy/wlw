@@ -2,7 +2,7 @@
   <table class="mx-auto mt-4">
     <tr v-for="(row, i) in wrestlers" :key="i">
       <td v-for="w in row" :key="w.uid">
-        <app-wrestler-img :src="w.img" :title="w.name" :onClick="() => onClick(w)" />
+        <app-wrestler-img :src="w.image" :title="w.name" :onClick="() => onClick(w)" />
       </td>
     </tr>
   </table>

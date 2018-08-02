@@ -23,7 +23,7 @@
     <div class="app-card-body text-center">
       <b-row>
         <b-col>
-          <img class="img-thumbnail" :src="card.img" :alt="card.name" />
+          <img class="img-thumbnail" :src="card.image" :alt="card.name" />
         </b-col>
       </b-row>
       <b-row>
