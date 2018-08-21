@@ -16,7 +16,7 @@ body {
 .bg-dark {
   background-color: #0d0f17 !important;
   border-color: #41526b;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 .btn-secondary,
@@ -47,8 +47,20 @@ body {
 ** OTHER
 */
 .navbar .navbar-brand {
-  font-size: 1.2em;
+  font-size: 1.7em;
   text-shadow: #41526b 0px 0px 7px;
+}
+
+.navbar .nav-item .nav-link {
+  font-size: 1.5em;
+}
+
+.navbar .nav-item {
+  padding: 0px 10px;
+}
+
+.navbar .nav-item:hover {
+  background: grey;
 }
 
 .card-header {

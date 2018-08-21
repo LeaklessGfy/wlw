@@ -1,17 +1,27 @@
 <template>
   <div class="page">
-    <b-jumbotron
-      header="World Live Wrestling"
-      lead="Bootstrap 4 Components for Vue.js 2"
-      class="app-jumbotron" >
-      <p>For more information visit website</p>
-      <b-btn variant="primary" href="#">More Info</b-btn>
-    </b-jumbotron>
     <b-container class="mt-2">
       <b-row>
         <b-col>
-          <h1>World Live Wrestling</h1>
-          <em>The first wrestling card game on browser.</em>
+          <b-card bg-variant="dark" text-variant="white" title="Solo">
+            <p>Offline</p>
+          </b-card>
+        </b-col>
+        <b-col>
+          <b-row>
+            <b-col>
+              <b-card bg-variant="dark" text-variant="white" title="Online Ranked">
+                <p>Settings</p>
+              </b-card>
+            </b-col>
+          </b-row>
+          <b-row class="mt-2">
+            <b-col>
+              <b-card bg-variant="dark" text-variant="white" title="Join federation">
+                <p>Settings</p>
+              </b-card>
+            </b-col>
+          </b-row>
         </b-col>
       </b-row>
     </b-container>
@@ -21,12 +31,4 @@
 <script>
 export default {};
 </script>
-
-<style>
-.app-jumbotron {
-  background: url("http://www.bhmpics.com/walls/wwe_wrestlemania_2-wide.jpg");
-  background-position: left top;
-  background-size: 150em;
-}
-</style>
 
